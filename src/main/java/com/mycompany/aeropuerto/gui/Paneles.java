@@ -43,6 +43,7 @@ public class Paneles extends javax.swing.JDialog {
         initComponents();
         cargarCBXCompanyas();
         cargarCBXComp();
+        pnlRecaudaciones.setVisible(false);
         
 
         Calendar c1 = Calendar.getInstance();
@@ -148,6 +149,20 @@ public class Paneles extends javax.swing.JDialog {
         cbxDestinos = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        pnlRecaudaciones = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        txtDiaDinero = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        txtMesDinero = new javax.swing.JTextField();
+        txtAnyoDinero = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        lblIngresoEsperado = new javax.swing.JLabel();
+        lblIngresoObtenido = new javax.swing.JLabel();
+        btnConsultar = new javax.swing.JButton();
+        btnRecaudaciones = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -575,11 +590,92 @@ public class Paneles extends javax.swing.JDialog {
                 .addGap(39, 39, 39))
         );
 
+        jLabel23.setText("Ingreso esperado:");
+
+        jLabel24.setText("Ingreso obtenido:");
+
+        jLabel25.setText("Fecha:");
+
+        jLabel26.setText("día");
+
+        jLabel27.setText("mes");
+
+        txtAnyoDinero.setText("Año:");
+
+        btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlRecaudacionesLayout = new javax.swing.GroupLayout(pnlRecaudaciones);
+        pnlRecaudaciones.setLayout(pnlRecaudacionesLayout);
+        pnlRecaudacionesLayout.setHorizontalGroup(
+            pnlRecaudacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRecaudacionesLayout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addGroup(pnlRecaudacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel25)
+                    .addGroup(pnlRecaudacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel23)
+                        .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.TRAILING)))
+                .addGap(18, 18, 18)
+                .addGroup(pnlRecaudacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlRecaudacionesLayout.createSequentialGroup()
+                        .addComponent(jLabel26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDiaDinero, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMesDinero, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtAnyoDinero)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblIngresoEsperado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblIngresoObtenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnConsultar)
+                .addContainerGap(212, Short.MAX_VALUE))
+        );
+        pnlRecaudacionesLayout.setVerticalGroup(
+            pnlRecaudacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRecaudacionesLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(pnlRecaudacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel26)
+                    .addComponent(txtDiaDinero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel27)
+                    .addComponent(txtMesDinero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAnyoDinero)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConsultar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlRecaudacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(lblIngresoEsperado))
+                .addGap(18, 18, 18)
+                .addGroup(pnlRecaudacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(lblIngresoObtenido))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        btnRecaudaciones.setText("Recaudaciones");
+        btnRecaudaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecaudacionesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -589,6 +685,14 @@ public class Paneles extends javax.swing.JDialog {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(562, 562, 562)
+                .addComponent(btnRecaudaciones)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlRecaudaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(200, 200, 200))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -601,7 +705,11 @@ public class Paneles extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnRecaudaciones)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlRecaudaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -682,6 +790,16 @@ for(VueloBase vb: lstVuelosBase){
         FiltrosL.setRowFilter(rfL);
     }//GEN-LAST:event_btnBuscarLlegadasActionPerformed
 
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        
+    }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void btnRecaudacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecaudacionesActionPerformed
+      if(pnlRecaudaciones.isVisible())
+        pnlRecaudaciones.setVisible(false);
+      else pnlRecaudaciones.setVisible(true);
+    }//GEN-LAST:event_btnRecaudacionesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -739,6 +857,8 @@ for(VueloBase vb: lstVuelosBase){
     private javax.swing.JButton btnBuscarFechaComp;
     private javax.swing.JButton btnBuscarFechaDestino;
     private javax.swing.JButton btnBuscarLlegadas;
+    private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnRecaudaciones;
     private javax.swing.JComboBox<String> cbxComp;
     private javax.swing.JComboBox<String> cbxDestinos;
     private javax.swing.JLabel jLabel1;
@@ -755,6 +875,11 @@ for(VueloBase vb: lstVuelosBase){
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -770,6 +895,10 @@ for(VueloBase vb: lstVuelosBase){
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblIngresoEsperado;
+    private javax.swing.JLabel lblIngresoObtenido;
+    private javax.swing.JPanel pnlRecaudaciones;
     private javax.swing.JTable tblCompanyas;
     private javax.swing.JTable tblDestinos;
     private javax.swing.JTable tblLlegadas;
@@ -777,14 +906,17 @@ for(VueloBase vb: lstVuelosBase){
     private javax.swing.JTextField txtAnyo;
     private javax.swing.JTextField txtAnyo2;
     private javax.swing.JTextField txtAnyo3;
+    private javax.swing.JLabel txtAnyoDinero;
     private javax.swing.JTextField txtAnyoLL;
     private javax.swing.JTextField txtDia;
     private javax.swing.JTextField txtDia2;
     private javax.swing.JTextField txtDia3;
+    private javax.swing.JTextField txtDiaDinero;
     private javax.swing.JTextField txtDiaLL;
     private javax.swing.JTextField txtMes;
     private javax.swing.JTextField txtMes2;
     private javax.swing.JTextField txtMes3;
+    private javax.swing.JTextField txtMesDinero;
     private javax.swing.JTextField txtMesLL;
     // End of variables declaration//GEN-END:variables
 }

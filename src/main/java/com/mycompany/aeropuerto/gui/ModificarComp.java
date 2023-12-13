@@ -80,7 +80,6 @@ public class ModificarComp extends javax.swing.JDialog {
         lblTituloModificar = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -279,13 +278,6 @@ public class ModificarComp extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -313,8 +305,6 @@ public class ModificarComp extends javax.swing.JDialog {
                         .addComponent(pnlModCompInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(52, 52, 52))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(184, 184, 184)
                         .addComponent(btnSalir)
                         .addGap(14, 14, 14))))
         );
@@ -334,9 +324,7 @@ public class ModificarComp extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlModificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalir)
-                    .addComponent(jButton2))
+                .addComponent(btnSalir)
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -446,15 +434,6 @@ String modificacion;
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        List<Aeropuerto> lstAeropuertos = new ArrayList<>();
-        lstAeropuertos = leerAeropuertosCSV();
-        for(Aeropuerto a: lstAeropuertos){
-        System.out.println("CÓDIGO: "+ a.getCodigoIATA()+" Nombre: "+ a.getNombre()+" Municipio: "+a.getCodigoMunicipio());
-        }
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void cargarCBXCompanyas() {
         List<CompanyaAerea> lstComp = leerCompanyasCSV();
 
@@ -516,7 +495,6 @@ String modificacion;
     private javax.swing.JComboBox<String> cbxCambios;
     private javax.swing.JComboBox<String> cbxLstComp;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

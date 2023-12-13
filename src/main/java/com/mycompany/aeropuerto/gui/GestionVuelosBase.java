@@ -8,12 +8,14 @@ import com.mycompany.aeropuerto.dto.Aeropuerto;
 import com.mycompany.aeropuerto.dto.CompanyaAerea;
 import com.mycompany.aeropuerto.dto.VueloBase;
 import static com.mycompany.aeropuerto.logica.LogicaNegocio.escribirCSVvuelosBase;
+import static com.mycompany.aeropuerto.logica.LogicaNegocio.getAllVuelosBase;
 import static com.mycompany.aeropuerto.logica.LogicaNegocio.leerAeropuertosCSV;
 import static com.mycompany.aeropuerto.logica.LogicaNegocio.leerCompanyasCSV;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -41,6 +43,8 @@ public class GestionVuelosBase extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         cargarAeropuertos();
+        //cargarcbxCodigos();
+        cargarCbxVuelosBase();
         lblInfo.setVisible(false);
 
         for (int i = 0; i < 24; i++) {
@@ -79,7 +83,7 @@ public class GestionVuelosBase extends javax.swing.JDialog {
         lblErrCodigo.setVisible(false);
         lblErrPlazas.setVisible(false);
         lblErrDiasOpera.setVisible(false);
-
+        cargarcbxCodigos();
 
         for (int i = 0; i < 24; i++) {
             if (i < 10) {
@@ -117,7 +121,6 @@ public class GestionVuelosBase extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtCodigoVueloBase = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -149,6 +152,9 @@ public class GestionVuelosBase extends javax.swing.JDialog {
         lblErrPlazas = new javax.swing.JLabel();
         lblErrAero = new javax.swing.JLabel();
         btnCompanyas = new javax.swing.JButton();
+        cbxCodigos = new javax.swing.JComboBox<>();
+        txtNumero = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -268,6 +274,16 @@ public class GestionVuelosBase extends javax.swing.JDialog {
             }
         });
 
+        cbxCodigos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código" }));
+
+        txtNumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumeroActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Num:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -295,7 +311,7 @@ public class GestionVuelosBase extends javax.swing.JDialog {
                             .addComponent(btnInfoDias, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(1, 1, 1)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtDiasOpera, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                                .addComponent(txtDiasOpera)
                                 .addComponent(txtPlazas)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -305,7 +321,7 @@ public class GestionVuelosBase extends javax.swing.JDialog {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(cbxHOSm, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(cbxHOLm, 0, 1, Short.MAX_VALUE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -318,17 +334,23 @@ public class GestionVuelosBase extends javax.swing.JDialog {
                                 .addComponent(lblErrPlazas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblErrAero)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txtCodigoVueloBase, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(cbxAeropuertoDestino, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cbxAeropuertoOrigen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cbxAeropuertoDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cbxAeropuertoOrigen, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(cbxCodigos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLabel12)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnCompanyas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addComponent(lblInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblErrDiasOpera, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,9 +359,11 @@ public class GestionVuelosBase extends javax.swing.JDialog {
                 .addComponent(jLabel9)
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCodigoVueloBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(btnCompanyas))
+                    .addComponent(btnCompanyas)
+                    .addComponent(cbxCodigos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblErrCodigo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -409,13 +433,28 @@ public class GestionVuelosBase extends javax.swing.JDialog {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         return sdf.format(fecha);
     }
+    
+    public void cargarcbxCodigos(){
+    List<CompanyaAerea> lstComp = leerCompanyasCSV();
+    for (CompanyaAerea ca : lstComp) {
+         cbxCodigos.addItem(ca.getCodigo().toString());
+    }
+    }
+    public void cargarCbxVuelosBase(){
+List<VueloBase> lstVuelosBase = new ArrayList<>();
+lstVuelosBase = getAllVuelosBase();
 
+for(VueloBase vb: lstVuelosBase){
+    cbxCodigos.addItem(vb.getCodigoVuelo());
+}
 
+    }
     private void btnGuardarVBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarVBActionPerformed
         VueloBase vueloBase = new VueloBase();
         List<CompanyaAerea> lstComp = leerCompanyasCSV();
-        boolean codigoComp = false;
         boolean guardar = true;
+       
+        /*
         for (CompanyaAerea ca : lstComp) {
             if (txtCodigoVueloBase.getText().contains(ca.getCodigo())) {
                 codigoComp = true;
@@ -423,12 +462,8 @@ public class GestionVuelosBase extends javax.swing.JDialog {
                 codigoComp = false;
             }
         }
-
-        if (!codigoComp) {
-            lblErrCodigo.setText("ERROR!! Este código  no encaja con ninguna compañía registrada.");
-            lblErrCodigo.setVisible(true);
-            guardar = false;
-        }
+*/
+       
 
         try {
             if (Integer.parseInt(txtPlazas.getText().toString()) <= 0) {
@@ -455,7 +490,7 @@ public class GestionVuelosBase extends javax.swing.JDialog {
             guardar = false;
 
         }
-        if (txtCodigoVueloBase.getText().isEmpty() || txtPlazas.getText().isEmpty() || txtDiasOpera.getText().isEmpty() || cbxAeropuertoOrigen.getSelectedItem().equals("Aeropuerto") || cbxAeropuertoDestino.getSelectedItem().equals("Aeropuerto")) {
+        if (cbxCodigos.getSelectedItem().equals("Código") || txtPlazas.getText().isEmpty() || txtDiasOpera.getText().isEmpty() || cbxAeropuertoOrigen.getSelectedItem().equals("Aeropuerto") || cbxAeropuertoDestino.getSelectedItem().equals("Aeropuerto")) {
             lblVacio.setText("ERROR!! No puede haber campos vacíos.");
             lblVacio.setVisible(true);
             guardar = false;
@@ -484,8 +519,10 @@ public class GestionVuelosBase extends javax.swing.JDialog {
                 Date horaLRFormateada = formatoHora.parse(horaLR);
                 Time timehoraSR = new Time(horaSRFormateada.getTime());
                 Time timehoraLR = new Time(horaLRFormateada.getTime());
+                
+                String codigoVuelo = cbxCodigos.getSelectedItem().toString()+txtNumero.getText();
 
-                vueloBase.setCodigoVuelo((txtCodigoVueloBase.getText()));
+                vueloBase.setCodigoVuelo(codigoVuelo);
 
                 vueloBase.setNumPlazas(Integer.parseInt(txtPlazas.getText()));
                 vueloBase.setDiasOpera(txtDiasOpera.getText());
@@ -574,6 +611,10 @@ public class GestionVuelosBase extends javax.swing.JDialog {
         tbv.setVisible(true);
     }//GEN-LAST:event_btnCompanyasActionPerformed
 
+    private void txtNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroActionPerformed
+        
+    }//GEN-LAST:event_txtNumeroActionPerformed
+
     private void cargarAeropuertos() {
         List<Aeropuerto> lstAeropuertos = leerAeropuertosCSV();
         for (Aeropuerto a : lstAeropuertos) {
@@ -631,6 +672,7 @@ public class GestionVuelosBase extends javax.swing.JDialog {
     private javax.swing.JButton btnInfoDias;
     private javax.swing.JComboBox<String> cbxAeropuertoDestino;
     private javax.swing.JComboBox<String> cbxAeropuertoOrigen;
+    private javax.swing.JComboBox<String> cbxCodigos;
     private javax.swing.JComboBox<String> cbxHOLh;
     private javax.swing.JComboBox<String> cbxHOLm;
     private javax.swing.JComboBox<String> cbxHOSh;
@@ -639,6 +681,7 @@ public class GestionVuelosBase extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -655,8 +698,8 @@ public class GestionVuelosBase extends javax.swing.JDialog {
     private javax.swing.JLabel lblHOS;
     private javax.swing.JLabel lblInfo;
     private javax.swing.JLabel lblVacio;
-    private javax.swing.JTextField txtCodigoVueloBase;
     private javax.swing.JTextField txtDiasOpera;
+    private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtPlazas;
     // End of variables declaration//GEN-END:variables
 }

@@ -575,21 +575,14 @@ public class Paneles extends javax.swing.JDialog {
         Date fechaSalida = new Date();
         String fechaSalidaS = txtDia.getText() + "-" + txtMes.getText() + "-" + txtAnyo.getText();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
-        int a = parseInt(txtAnyo.getText())-1901;
-        int b = parseInt(txtMes.getText());
-        int c = parseInt(txtDia.getText());
-        
-        Date fechaS = new Date(a,b, c);
         try {
-
-            Date fechaConvertida = formatoFecha.parse(fechaSalidaS);
-            RowFilter<SalidasTableModel, Integer> rfS = RowFilter.dateFilter(RowFilter.ComparisonType.EQUAL, fechaS, 5);
+             Date fechaConvertida = formatoFecha.parse(fechaSalidaS);
+            RowFilter<SalidasTableModel, Integer> rfS = RowFilter.regexFilter(fechaSalidaS, 5);
             FiltrosS.setRowFilter(rfS);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        //fechaSalida = fechaSalidaS.SimpleDateFormat();
-        //RowFilter<SalidasTableModel,Integer> rfS = RowFilter.dateFilter(RowFilter.ComparisonType.AFTER, date, indices)
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void cbxCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCompActionPerformed

@@ -132,6 +132,8 @@ public class Paneles extends javax.swing.JDialog {
         btnBuscarFechaComp = new javax.swing.JButton();
         cbxComp = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -145,6 +147,7 @@ public class Paneles extends javax.swing.JDialog {
         btnBuscarFechaDestino = new javax.swing.JButton();
         cbxDestinos = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -385,6 +388,12 @@ public class Paneles extends javax.swing.JDialog {
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Seleccionar compañía:");
 
+        jLabel20.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel20.setText("Deshabilitado");
+
+        jLabel21.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel21.setText("Fecha deshabilitada");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -412,9 +421,16 @@ public class Paneles extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnBuscarFechaComp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbxComp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+                            .addComponent(cbxComp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel21)))
+                .addGap(0, 192, Short.MAX_VALUE))
+            .addComponent(jScrollPane4)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(265, 265, 265)
+                    .addComponent(jLabel20)
+                    .addContainerGap(266, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -429,7 +445,8 @@ public class Paneles extends javax.swing.JDialog {
                     .addComponent(txtMes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
                     .addComponent(txtAnyo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarFechaComp))
+                    .addComponent(btnBuscarFechaComp)
+                    .addComponent(jLabel21))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbxComp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -437,6 +454,11 @@ public class Paneles extends javax.swing.JDialog {
                 .addGap(11, 11, 11)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(211, 211, 211)
+                    .addComponent(jLabel20)
+                    .addContainerGap(211, Short.MAX_VALUE)))
         );
 
         jPanel4.setBackground(new java.awt.Color(0, 0, 0));
@@ -493,6 +515,9 @@ public class Paneles extends javax.swing.JDialog {
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Seleccionar destino:");
 
+        jLabel19.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel19.setText("Fecha deshabilitada");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -520,7 +545,9 @@ public class Paneles extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnBuscarFechaDestino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbxDestinos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(cbxDestinos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel19)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jScrollPane5)
         );
@@ -537,7 +564,8 @@ public class Paneles extends javax.swing.JDialog {
                     .addComponent(txtMes3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17)
                     .addComponent(txtAnyo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarFechaDestino))
+                    .addComponent(btnBuscarFechaDestino)
+                    .addComponent(jLabel19))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbxDestinos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -594,8 +622,8 @@ public class Paneles extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void cbxCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCompActionPerformed
-              String comp = cbxComp.getSelectedItem().toString();
-              LlegadasTableModel ltb = new LlegadasTableModel(LogicaNegocio.getAllVuelosDiarios());
+        String comp = cbxComp.getSelectedItem().toString();
+        LlegadasTableModel ltb = new LlegadasTableModel(LogicaNegocio.getAllVuelosDiarios());
         tblCompanyas.setModel(ltb);
         
         TableRowSorter<LlegadasTableModel> FiltrosC = new TableRowSorter<>(ltb);
@@ -641,11 +669,17 @@ for(VueloBase vb: lstVuelosBase){
     }//GEN-LAST:event_cbxDestinosActionPerformed
 
     private void btnBuscarLlegadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLlegadasActionPerformed
-         String fechaLlegada = txtDiaLL.getText() + "-" + txtMesLL.getText() + "-" + txtAnyoLL.getText();
-         RowFilter<LlegadasTableModel, Integer> rfL = RowFilter.regexFilter(fechaLlegada, 5);
-         FiltrosL.setRowFilter(rfL);
        
-        
+        tblLlegadas.setModel(new LlegadasTableModel(LogicaNegocio.getAllVuelosDiarios()));
+        FiltrosL = new TableRowSorter<>(new LlegadasTableModel(LogicaNegocio.getAllVuelosDiarios()));
+        TableRowSorter<LlegadasTableModel> FiltrosL = new TableRowSorter<>(new LlegadasTableModel(LogicaNegocio.getAllVuelosDiarios()));
+        tblLlegadas.setRowSorter(FiltrosL);
+        List<SortKey> skLlegadas = new ArrayList<>();
+        skLlegadas.add(new SortKey(2, SortOrder.ASCENDING));
+        FiltrosL.setSortKeys(skLlegadas);
+        String fechaLlegada = txtDiaLL.getText() + "-" + txtMesLL.getText() + "-" + txtAnyoLL.getText();
+        RowFilter<LlegadasTableModel, Integer> rfL = RowFilter.regexFilter(fechaLlegada, 5);
+        FiltrosL.setRowFilter(rfL);
     }//GEN-LAST:event_btnBuscarLlegadasActionPerformed
 
     /**
@@ -717,7 +751,10 @@ for(VueloBase vb: lstVuelosBase){
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

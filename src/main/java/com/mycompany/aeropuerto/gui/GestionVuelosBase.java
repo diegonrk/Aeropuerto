@@ -148,6 +148,7 @@ public class GestionVuelosBase extends javax.swing.JDialog {
         lblVacio = new javax.swing.JLabel();
         lblErrPlazas = new javax.swing.JLabel();
         lblErrAero = new javax.swing.JLabel();
+        btnCompanyas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -260,6 +261,13 @@ public class GestionVuelosBase extends javax.swing.JDialog {
         lblErrAero.setFont(new java.awt.Font("sansserif", 0, 10)); // NOI18N
         lblErrAero.setForeground(new java.awt.Color(255, 0, 0));
 
+        btnCompanyas.setText("Tabla Compañías");
+        btnCompanyas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCompanyasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -315,7 +323,9 @@ public class GestionVuelosBase extends javax.swing.JDialog {
                                         .addComponent(cbxAeropuertoDestino, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(cbxAeropuertoOrigen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jButton1))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnCompanyas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addComponent(lblInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblErrDiasOpera, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43))
@@ -328,7 +338,8 @@ public class GestionVuelosBase extends javax.swing.JDialog {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCodigoVueloBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(btnCompanyas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblErrCodigo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -379,7 +390,7 @@ public class GestionVuelosBase extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblVacio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardarVB))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         lblInfo.getAccessibleContext().setAccessibleParent(btnInfoDias);
@@ -558,6 +569,11 @@ public class GestionVuelosBase extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnCompanyasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompanyasActionPerformed
+        TablaConsultasComp tbv = new TablaConsultasComp();
+        tbv.setVisible(true);
+    }//GEN-LAST:event_btnCompanyasActionPerformed
+
     private void cargarAeropuertos() {
         List<Aeropuerto> lstAeropuertos = leerAeropuertosCSV();
         for (Aeropuerto a : lstAeropuertos) {
@@ -610,6 +626,7 @@ public class GestionVuelosBase extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCompanyas;
     private javax.swing.JButton btnGuardarVB;
     private javax.swing.JButton btnInfoDias;
     private javax.swing.JComboBox<String> cbxAeropuertoDestino;

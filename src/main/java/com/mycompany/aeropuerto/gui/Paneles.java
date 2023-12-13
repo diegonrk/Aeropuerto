@@ -11,6 +11,7 @@ import static com.mycompany.aeropuerto.logica.LogicaNegocio.actualizarCSVComp;
 import static com.mycompany.aeropuerto.logica.LogicaNegocio.getAllVuelosBase;
 import static com.mycompany.aeropuerto.logica.LogicaNegocio.leerCompanyasCSV;
 import java.awt.Color;
+import static java.lang.Integer.parseInt;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -574,10 +575,15 @@ public class Paneles extends javax.swing.JDialog {
         Date fechaSalida = new Date();
         String fechaSalidaS = txtDia.getText() + "-" + txtMes.getText() + "-" + txtAnyo.getText();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
+        int a = parseInt(txtAnyo.getText())-1901;
+        int b = parseInt(txtMes.getText());
+        int c = parseInt(txtDia.getText());
+        
+        Date fechaS = new Date(a,b, c);
         try {
 
             Date fechaConvertida = formatoFecha.parse(fechaSalidaS);
-            RowFilter<SalidasTableModel, Integer> rfS = RowFilter.dateFilter(RowFilter.ComparisonType.AFTER, fechaConvertida, 5);
+            RowFilter<SalidasTableModel, Integer> rfS = RowFilter.dateFilter(RowFilter.ComparisonType.EQUAL, fechaS, 5);
             FiltrosS.setRowFilter(rfS);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -601,39 +607,6 @@ public class Paneles extends javax.swing.JDialog {
         RowFilter<LlegadasTableModel, Integer> rfC = RowFilter.regexFilter(comp, 4);
         FiltrosC.setRowFilter(rfC);
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        /*List<CompanyaAerea> lstComp = leerCompanyasCSV();
-        String comp = cbxComp.getSelectedItem().toString();
-        TableRowSorter<SalidasTableModel> OrdenComp;
-        OrdenComp = new TableRowSorter<>(new SalidasTableModel(LogicaNegocio.getAllVuelosDiarios()));
-                tblCompanyas.setRowSorter(OrdenComp);
-                List<RowSorter.SortKey> skSalidas = new ArrayList<>();
-                skSalidas.add(new RowSorter.SortKey(2, SortOrder.ASCENDING));
-                OrdenComp.setSortKeys(skSalidas);
-                RowFilter<SalidasTableModel, Integer> rfS = RowFilter.regexFilter(comp, 4);
-                OrdenComp.setRowFilter(rfS);
-       /*
-                for (CompanyaAerea c : lstComp) {
-            if (c.getNombre().equals(comp)) {
-                
-                OrdenComp = new TableRowSorter<>(new SalidasTableModel(LogicaNegocio.getAllVuelosDiarios()));
-                tblCompanyas.setRowSorter(OrdenComp);
-                List<RowSorter.SortKey> skSalidas = new ArrayList<>();
-                skSalidas.add(new RowSorter.SortKey(2, SortOrder.ASCENDING));
-                OrdenComp.setSortKeys(skSalidas);
-                RowFilter<SalidasTableModel, Integer> rfS = RowFilter.regexFilter(comp, 4);
-                OrdenComp.setRowFilter(rfS);
-
-            }
-        }*/
 
     }//GEN-LAST:event_cbxCompActionPerformed
 

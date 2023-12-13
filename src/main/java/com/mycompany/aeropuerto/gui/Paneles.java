@@ -32,7 +32,7 @@ import javax.swing.table.TableRowSorter;
  */
 public class Paneles extends javax.swing.JDialog {
 
-    TableRowSorter<SalidasTableModel> FiltrosS;
+    TableRowSorter<SalidasTableModel> FiltrosS, FiltrosD;
     TableRowSorter<LlegadasTableModel> FiltrosL;
 
     /**
@@ -61,23 +61,26 @@ public class Paneles extends javax.swing.JDialog {
         FiltrosS.setSortKeys(skSalidas);
         RowFilter<SalidasTableModel, Integer> rf = RowFilter.notFilter(RowFilter.regexFilter("Aeropuerto de Asturias", 1));
         FiltrosS.setRowFilter(rf);
-        txtDia1.setText(dia);
-        txtMes1.setText(mes);
-        txtAnyo1.setText(annio);
+        txtDiaLL.setText(dia);
+        txtMesLL.setText(mes);
+        txtAnyoLL.setText(annio);
 
         //Código panel de llegadas
+       
         tblLlegadas.setModel(new LlegadasTableModel(LogicaNegocio.getAllVuelosDiarios()));
+        FiltrosL = new TableRowSorter<>(new LlegadasTableModel(LogicaNegocio.getAllVuelosDiarios()));
         TableRowSorter<LlegadasTableModel> FiltrosL = new TableRowSorter<>(new LlegadasTableModel(LogicaNegocio.getAllVuelosDiarios()));
         tblLlegadas.setRowSorter(FiltrosL);
         List<SortKey> skLlegadas = new ArrayList<>();
         skLlegadas.add(new SortKey(2, SortOrder.ASCENDING));
-        FiltrosS.setSortKeys(skLlegadas);
+        FiltrosL.setSortKeys(skLlegadas);
         RowFilter<LlegadasTableModel, Integer> rfL = RowFilter.notFilter(RowFilter.regexFilter("Aeropuerto de Asturias", 1));
         FiltrosL.setRowFilter(rfL);
-        txtDia1.setText(dia);
-        txtMes1.setText(mes);
-        txtAnyo1.setText(annio);
-
+       /*
+        txtDiaLL.setText(dia);
+        txtMesLL.setText(mes);
+        txtAnyoLL.setText(annio);
+*/
         tblCompanyas.setModel(new LlegadasTableModel(LogicaNegocio.getAllVuelosDiarios()));
         tblDestinos.setModel(new SalidasTableModel(LogicaNegocio.getAllVuelosDiarios()));
         
@@ -100,11 +103,11 @@ public class Paneles extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtDia1 = new javax.swing.JTextField();
-        btnBuscar1 = new javax.swing.JButton();
+        txtDiaLL = new javax.swing.JTextField();
+        btnBuscarLlegadas = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        txtAnyo1 = new javax.swing.JTextField();
-        txtMes1 = new javax.swing.JTextField();
+        txtAnyoLL = new javax.swing.JTextField();
+        txtMesLL = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -126,7 +129,7 @@ public class Paneles extends javax.swing.JDialog {
         txtMes2 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         txtAnyo2 = new javax.swing.JTextField();
-        btnBuscar2 = new javax.swing.JButton();
+        btnBuscarFechaComp = new javax.swing.JButton();
         cbxComp = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -139,7 +142,7 @@ public class Paneles extends javax.swing.JDialog {
         txtMes3 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         txtAnyo3 = new javax.swing.JTextField();
-        btnBuscar3 = new javax.swing.JButton();
+        btnBuscarFechaDestino = new javax.swing.JButton();
         cbxDestinos = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
 
@@ -175,20 +178,25 @@ public class Paneles extends javax.swing.JDialog {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("/");
 
-        txtDia1.setBackground(new java.awt.Color(0, 0, 0));
-        txtDia1.setForeground(new java.awt.Color(255, 255, 255));
+        txtDiaLL.setBackground(new java.awt.Color(0, 0, 0));
+        txtDiaLL.setForeground(new java.awt.Color(255, 255, 255));
 
-        btnBuscar1.setText("Buscar");
+        btnBuscarLlegadas.setText("Buscar");
+        btnBuscarLlegadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarLlegadasActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Fecha:");
 
-        txtAnyo1.setBackground(new java.awt.Color(0, 0, 0));
-        txtAnyo1.setForeground(new java.awt.Color(255, 255, 255));
+        txtAnyoLL.setBackground(new java.awt.Color(0, 0, 0));
+        txtAnyoLL.setForeground(new java.awt.Color(255, 255, 255));
 
-        txtMes1.setBackground(new java.awt.Color(0, 0, 0));
-        txtMes1.setForeground(new java.awt.Color(255, 255, 255));
+        txtMesLL.setBackground(new java.awt.Color(0, 0, 0));
+        txtMesLL.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -201,17 +209,17 @@ public class Paneles extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDia1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDiaLL, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMes1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtMesLL, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtAnyo1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtAnyoLL, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBuscarLlegadas, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -221,12 +229,12 @@ public class Paneles extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
-                        .addComponent(txtDia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtDiaLL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7)
-                        .addComponent(txtMes1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtMesLL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel8)
-                        .addComponent(txtAnyo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBuscar1))
+                        .addComponent(txtAnyoLL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBuscarLlegadas))
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -330,7 +338,7 @@ public class Paneles extends javax.swing.JDialog {
         jLabel9.setText("VUELOS POR COMPAÑÍA");
 
         tblCompanyas.setBackground(new java.awt.Color(0, 0, 0));
-        tblCompanyas.setForeground(new java.awt.Color(0, 255, 0));
+        tblCompanyas.setForeground(new java.awt.Color(153, 255, 51));
         tblCompanyas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -365,7 +373,7 @@ public class Paneles extends javax.swing.JDialog {
         txtAnyo2.setBackground(new java.awt.Color(0, 0, 0));
         txtAnyo2.setForeground(new java.awt.Color(255, 255, 255));
 
-        btnBuscar2.setText("Buscar");
+        btnBuscarFechaComp.setText("Buscar");
 
         cbxComp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comp." }));
         cbxComp.addActionListener(new java.awt.event.ActionListener() {
@@ -403,7 +411,7 @@ public class Paneles extends javax.swing.JDialog {
                             .addComponent(jLabel13))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnBuscar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuscarFechaComp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbxComp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
@@ -421,7 +429,7 @@ public class Paneles extends javax.swing.JDialog {
                     .addComponent(txtMes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
                     .addComponent(txtAnyo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar2))
+                    .addComponent(btnBuscarFechaComp))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbxComp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -438,7 +446,7 @@ public class Paneles extends javax.swing.JDialog {
         jLabel14.setText("VUELOS POR DESTINO");
 
         tblDestinos.setBackground(new java.awt.Color(0, 0, 0));
-        tblDestinos.setForeground(new java.awt.Color(0, 255, 0));
+        tblDestinos.setForeground(new java.awt.Color(153, 255, 51));
         tblDestinos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -473,7 +481,7 @@ public class Paneles extends javax.swing.JDialog {
         txtAnyo3.setBackground(new java.awt.Color(0, 0, 0));
         txtAnyo3.setForeground(new java.awt.Color(255, 255, 255));
 
-        btnBuscar3.setText("Buscar");
+        btnBuscarFechaDestino.setText("Buscar");
 
         cbxDestinos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Destino" }));
         cbxDestinos.addActionListener(new java.awt.event.ActionListener() {
@@ -511,7 +519,7 @@ public class Paneles extends javax.swing.JDialog {
                             .addComponent(jLabel18))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnBuscar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuscarFechaDestino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbxDestinos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jScrollPane5)
@@ -529,7 +537,7 @@ public class Paneles extends javax.swing.JDialog {
                     .addComponent(txtMes3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17)
                     .addComponent(txtAnyo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar3))
+                    .addComponent(btnBuscarFechaDestino))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbxDestinos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -560,7 +568,7 @@ public class Paneles extends javax.swing.JDialog {
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -572,7 +580,7 @@ public class Paneles extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        Date fechaSalida = new Date();
+        
         String fechaSalidaS = txtDia.getText() + "-" + txtMes.getText() + "-" + txtAnyo.getText();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
         try {
@@ -616,8 +624,29 @@ for(VueloBase vb: lstVuelosBase){
     
     
     private void cbxDestinosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxDestinosActionPerformed
+        String destino = cbxDestinos.getSelectedItem().toString();
+        SalidasTableModel ltb = new SalidasTableModel(LogicaNegocio.getAllVuelosDiarios());
+        tblDestinos.setModel(ltb);
+        
+        TableRowSorter<SalidasTableModel> FiltrosD = new TableRowSorter<>(ltb);
+        tblDestinos.setRowSorter(FiltrosD);
+        
+        List<SortKey> skDestinos = new ArrayList<>();
+        skDestinos.add(new SortKey(2, SortOrder.ASCENDING));
+        FiltrosD.setSortKeys(skDestinos);
+       
+        RowFilter<SalidasTableModel, Integer> rfC = RowFilter.regexFilter(destino, 1);
+       FiltrosD.setRowFilter(rfC);
         
     }//GEN-LAST:event_cbxDestinosActionPerformed
+
+    private void btnBuscarLlegadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLlegadasActionPerformed
+         String fechaLlegada = txtDiaLL.getText() + "-" + txtMesLL.getText() + "-" + txtAnyoLL.getText();
+         RowFilter<LlegadasTableModel, Integer> rfL = RowFilter.regexFilter(fechaLlegada, 5);
+         FiltrosL.setRowFilter(rfL);
+       
+        
+    }//GEN-LAST:event_btnBuscarLlegadasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -673,9 +702,9 @@ for(VueloBase vb: lstVuelosBase){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnBuscar1;
-    private javax.swing.JButton btnBuscar2;
-    private javax.swing.JButton btnBuscar3;
+    private javax.swing.JButton btnBuscarFechaComp;
+    private javax.swing.JButton btnBuscarFechaDestino;
+    private javax.swing.JButton btnBuscarLlegadas;
     private javax.swing.JComboBox<String> cbxComp;
     private javax.swing.JComboBox<String> cbxDestinos;
     private javax.swing.JLabel jLabel1;
@@ -709,16 +738,16 @@ for(VueloBase vb: lstVuelosBase){
     private javax.swing.JTable tblLlegadas;
     private javax.swing.JTable tblSalidas;
     private javax.swing.JTextField txtAnyo;
-    private javax.swing.JTextField txtAnyo1;
     private javax.swing.JTextField txtAnyo2;
     private javax.swing.JTextField txtAnyo3;
+    private javax.swing.JTextField txtAnyoLL;
     private javax.swing.JTextField txtDia;
-    private javax.swing.JTextField txtDia1;
     private javax.swing.JTextField txtDia2;
     private javax.swing.JTextField txtDia3;
+    private javax.swing.JTextField txtDiaLL;
     private javax.swing.JTextField txtMes;
-    private javax.swing.JTextField txtMes1;
     private javax.swing.JTextField txtMes2;
     private javax.swing.JTextField txtMes3;
+    private javax.swing.JTextField txtMesLL;
     // End of variables declaration//GEN-END:variables
 }

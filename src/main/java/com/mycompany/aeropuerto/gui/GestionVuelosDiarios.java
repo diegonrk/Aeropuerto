@@ -221,6 +221,11 @@ public class GestionVuelosDiarios extends javax.swing.JDialog {
         jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         cbxCodigoVD.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona el código" }));
+        cbxCodigoVD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCodigoVDActionPerformed(evt);
+            }
+        });
 
         btnTablaVB.setText("Ver tabla");
         btnTablaVB.addActionListener(new java.awt.event.ActionListener() {
@@ -449,6 +454,10 @@ for(VueloBase vb: lstVuelosBase){
        txtPlazasOcupadas.setText("");
        txtPrecioVuelo.setText("");
     }//GEN-LAST:event_btnNuevoVueloActionPerformed
+
+    private void cbxCodigoVDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCodigoVDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxCodigoVDActionPerformed
 
     
     

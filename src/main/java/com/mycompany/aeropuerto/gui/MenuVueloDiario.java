@@ -76,6 +76,11 @@ public class MenuVueloDiario extends javax.swing.JDialog {
         btnModificacionesVD.setFont(btnModificacionesVD.getFont().deriveFont((btnModificacionesVD.getFont().getStyle() & ~java.awt.Font.ITALIC) | java.awt.Font.BOLD));
         btnModificacionesVD.setText("MODICACIONES");
         btnModificacionesVD.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnModificacionesVD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificacionesVDActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnModificacionesVD);
 
         btnConsultasVD.setBackground(new java.awt.Color(204, 204, 255));
@@ -151,6 +156,11 @@ public class MenuVueloDiario extends javax.swing.JDialog {
         TablaConsultasVD tcVD = new TablaConsultasVD();
         tcVD.setVisible(true);
     }//GEN-LAST:event_btnConsultasVDActionPerformed
+
+    private void btnModificacionesVDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificacionesVDActionPerformed
+        ModVueloDiario mvd = new ModVueloDiario();
+        mvd.setVisible(true);
+    }//GEN-LAST:event_btnModificacionesVDActionPerformed
 
     /**
      * @param args the command line arguments

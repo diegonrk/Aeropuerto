@@ -62,9 +62,7 @@ public class Paneles extends javax.swing.JDialog {
         FiltrosS.setSortKeys(skSalidas);
         RowFilter<SalidasTableModel, Integer> rf = RowFilter.notFilter(RowFilter.regexFilter("Aeropuerto de Asturias", 1));
         FiltrosS.setRowFilter(rf);
-        txtDiaLL.setText(dia);
-        txtMesLL.setText(mes);
-        txtAnyoLL.setText(annio);
+        
 
         //Código panel de llegadas
        
@@ -77,11 +75,8 @@ public class Paneles extends javax.swing.JDialog {
         FiltrosL.setSortKeys(skLlegadas);
         RowFilter<LlegadasTableModel, Integer> rfL = RowFilter.notFilter(RowFilter.regexFilter("Aeropuerto de Asturias", 1));
         FiltrosL.setRowFilter(rfL);
-       /*
-        txtDiaLL.setText(dia);
-        txtMesLL.setText(mes);
-        txtAnyoLL.setText(annio);
-*/
+       
+
         tblCompanyas.setModel(new LlegadasTableModel(LogicaNegocio.getAllVuelosDiarios()));
         tblDestinos.setModel(new SalidasTableModel(LogicaNegocio.getAllVuelosDiarios()));
         

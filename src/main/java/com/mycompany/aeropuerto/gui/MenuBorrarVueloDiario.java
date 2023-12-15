@@ -67,10 +67,12 @@ public class MenuBorrarVueloDiario extends javax.swing.JDialog {
         cbxOrigen = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtableVueloDiario = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         btnSi = new javax.swing.JButton();
         btnNo = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -108,6 +110,9 @@ public class MenuBorrarVueloDiario extends javax.swing.JDialog {
         ));
         jScrollPane2.setViewportView(jtableVueloDiario);
 
+        jLabel6.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel6.setText("Deshabilitado");
+
         javax.swing.GroupLayout pnlOrigenLayout = new javax.swing.GroupLayout(pnlOrigen);
         pnlOrigen.setLayout(pnlOrigenLayout);
         pnlOrigenLayout.setHorizontalGroup(
@@ -119,8 +124,10 @@ public class MenuBorrarVueloDiario extends javax.swing.JDialog {
                     .addGroup(pnlOrigenLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(36, 36, 36)
-                        .addComponent(cbxOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cbxOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         pnlOrigenLayout.setVerticalGroup(
             pnlOrigenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,7 +135,8 @@ public class MenuBorrarVueloDiario extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(pnlOrigenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(cbxOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(19, Short.MAX_VALUE))
@@ -173,6 +181,9 @@ public class MenuBorrarVueloDiario extends javax.swing.JDialog {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
+        jLabel5.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel5.setText("Deshabilitado");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -189,7 +200,9 @@ public class MenuBorrarVueloDiario extends javax.swing.JDialog {
                                 .addGap(175, 175, 175)
                                 .addComponent(jLabel2)
                                 .addGap(27, 27, 27)
-                                .addComponent(cbxFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cbxFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -205,7 +218,8 @@ public class MenuBorrarVueloDiario extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(cbxFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -323,6 +337,8 @@ public class MenuBorrarVueloDiario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jtableVueloDiario;

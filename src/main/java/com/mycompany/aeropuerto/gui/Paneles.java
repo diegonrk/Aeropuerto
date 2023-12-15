@@ -6,12 +6,15 @@ package com.mycompany.aeropuerto.gui;
 
 import com.mycompany.aeropuerto.dto.CompanyaAerea;
 import com.mycompany.aeropuerto.dto.VueloBase;
+import com.mycompany.aeropuerto.dto.VueloDiario;
 import com.mycompany.aeropuerto.logica.LogicaNegocio;
 import static com.mycompany.aeropuerto.logica.LogicaNegocio.actualizarCSVComp;
 import static com.mycompany.aeropuerto.logica.LogicaNegocio.getAllVuelosBase;
+import static com.mycompany.aeropuerto.logica.LogicaNegocio.getAllVuelosDiarios;
 import static com.mycompany.aeropuerto.logica.LogicaNegocio.leerCompanyasCSV;
 import java.awt.Color;
 import static java.lang.Integer.parseInt;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -44,7 +47,6 @@ public class Paneles extends javax.swing.JDialog {
         cargarCBXCompanyas();
         cargarCBXComp();
         pnlRecaudaciones.setVisible(false);
-        
 
         Calendar c1 = Calendar.getInstance();
         Calendar c2 = new GregorianCalendar();
@@ -62,10 +64,8 @@ public class Paneles extends javax.swing.JDialog {
         FiltrosS.setSortKeys(skSalidas);
         RowFilter<SalidasTableModel, Integer> rf = RowFilter.notFilter(RowFilter.regexFilter("Aeropuerto de Asturias", 1));
         FiltrosS.setRowFilter(rf);
-        
 
         //Código panel de llegadas
-       
         tblLlegadas.setModel(new LlegadasTableModel(LogicaNegocio.getAllVuelosDiarios()));
         FiltrosL = new TableRowSorter<>(new LlegadasTableModel(LogicaNegocio.getAllVuelosDiarios()));
         TableRowSorter<LlegadasTableModel> FiltrosL = new TableRowSorter<>(new LlegadasTableModel(LogicaNegocio.getAllVuelosDiarios()));
@@ -75,13 +75,10 @@ public class Paneles extends javax.swing.JDialog {
         FiltrosL.setSortKeys(skLlegadas);
         RowFilter<LlegadasTableModel, Integer> rfL = RowFilter.notFilter(RowFilter.regexFilter("Aeropuerto de Asturias", 1));
         FiltrosL.setRowFilter(rfL);
-       
 
         tblCompanyas.setModel(new LlegadasTableModel(LogicaNegocio.getAllVuelosDiarios()));
         tblDestinos.setModel(new SalidasTableModel(LogicaNegocio.getAllVuelosDiarios()));
-        
-        
-   
+
     }
 
     /**
@@ -152,8 +149,8 @@ public class Paneles extends javax.swing.JDialog {
         txtDiaDinero = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         txtMesDinero = new javax.swing.JTextField();
-        txtAnyoDinero = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        lblX = new javax.swing.JLabel();
+        txtAnyoDinero = new javax.swing.JTextField();
         lblIngresoEsperado = new javax.swing.JLabel();
         lblIngresoObtenido = new javax.swing.JLabel();
         btnConsultar = new javax.swing.JButton();
@@ -434,7 +431,7 @@ public class Paneles extends javax.swing.JDialog {
                             .addComponent(cbxComp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel21)))
-                .addGap(0, 192, Short.MAX_VALUE))
+                .addGap(0, 182, Short.MAX_VALUE))
             .addComponent(jScrollPane4)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
@@ -595,7 +592,7 @@ public class Paneles extends javax.swing.JDialog {
 
         jLabel27.setText("mes");
 
-        txtAnyoDinero.setText("Año:");
+        lblX.setText("Año:");
 
         btnConsultar.setText("Consultar");
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -626,9 +623,9 @@ public class Paneles extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtMesDinero, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txtAnyoDinero)
+                        .addComponent(lblX)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtAnyoDinero, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblIngresoEsperado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblIngresoObtenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
@@ -645,8 +642,8 @@ public class Paneles extends javax.swing.JDialog {
                     .addComponent(txtDiaDinero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel27)
                     .addComponent(txtMesDinero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAnyoDinero)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblX)
+                    .addComponent(txtAnyoDinero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnConsultar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlRecaudacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -711,68 +708,66 @@ public class Paneles extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        
+
         String fechaSalidaS = txtDia.getText() + "-" + txtMes.getText() + "-" + txtAnyo.getText();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
         try {
-             Date fechaConvertida = formatoFecha.parse(fechaSalidaS);
+            Date fechaConvertida = formatoFecha.parse(fechaSalidaS);
             RowFilter<SalidasTableModel, Integer> rfS = RowFilter.regexFilter(fechaSalidaS, 5);
             FiltrosS.setRowFilter(rfS);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void cbxCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCompActionPerformed
         String comp = cbxComp.getSelectedItem().toString();
         LlegadasTableModel ltb = new LlegadasTableModel(LogicaNegocio.getAllVuelosDiarios());
         tblCompanyas.setModel(ltb);
-        
+
         TableRowSorter<LlegadasTableModel> FiltrosC = new TableRowSorter<>(ltb);
         tblCompanyas.setRowSorter(FiltrosC);
-        
+
         List<SortKey> skCompanyas = new ArrayList<>();
         skCompanyas.add(new SortKey(2, SortOrder.ASCENDING));
         FiltrosC.setSortKeys(skCompanyas);
-       
+
         RowFilter<LlegadasTableModel, Integer> rfC = RowFilter.regexFilter(comp, 4);
         FiltrosC.setRowFilter(rfC);
-        
+
 
     }//GEN-LAST:event_cbxCompActionPerformed
 
-    
-    
- public void cargarCBXComp(){
- List<VueloBase> lstVuelosBase = new ArrayList<>();
-lstVuelosBase = getAllVuelosBase();
+    public void cargarCBXComp() {
+        List<VueloBase> lstVuelosBase = new ArrayList<>();
+        lstVuelosBase = getAllVuelosBase();
 
-for(VueloBase vb: lstVuelosBase){
- cbxDestinos.addItem(vb.getAeropuertoDestino());
-}
- }  
-    
-    
+        for (VueloBase vb : lstVuelosBase) {
+            cbxDestinos.addItem(vb.getAeropuertoDestino());
+        }
+    }
+
+
     private void cbxDestinosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxDestinosActionPerformed
         String destino = cbxDestinos.getSelectedItem().toString();
         SalidasTableModel ltb = new SalidasTableModel(LogicaNegocio.getAllVuelosDiarios());
         tblDestinos.setModel(ltb);
-        
+
         TableRowSorter<SalidasTableModel> FiltrosD = new TableRowSorter<>(ltb);
         tblDestinos.setRowSorter(FiltrosD);
-        
+
         List<SortKey> skDestinos = new ArrayList<>();
         skDestinos.add(new SortKey(2, SortOrder.ASCENDING));
         FiltrosD.setSortKeys(skDestinos);
-       
+
         RowFilter<SalidasTableModel, Integer> rfC = RowFilter.regexFilter(destino, 1);
-       FiltrosD.setRowFilter(rfC);
-        
+        FiltrosD.setRowFilter(rfC);
+
     }//GEN-LAST:event_cbxDestinosActionPerformed
 
     private void btnBuscarLlegadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLlegadasActionPerformed
-       
+
         tblLlegadas.setModel(new LlegadasTableModel(LogicaNegocio.getAllVuelosDiarios()));
         FiltrosL = new TableRowSorter<>(new LlegadasTableModel(LogicaNegocio.getAllVuelosDiarios()));
         TableRowSorter<LlegadasTableModel> FiltrosL = new TableRowSorter<>(new LlegadasTableModel(LogicaNegocio.getAllVuelosDiarios()));
@@ -786,19 +781,52 @@ for(VueloBase vb: lstVuelosBase){
     }//GEN-LAST:event_btnBuscarLlegadasActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        List<VueloDiario> lstVuelosDiarios = getAllVuelosDiarios();
+        List<VueloBase> lstVuelosBase = getAllVuelosBase();
+
+        double obtenido = 0;
+        double esperado = 0;
+        int diaFiltro = Integer.parseInt(txtDiaDinero.getText());
+        int mesFiltro = Integer.parseInt(txtMesDinero.getText());
+        int anyoFiltro = Integer.parseInt(txtAnyoDinero.getText());
+        Date fechaFiltro = new Date(anyoFiltro - 1900, mesFiltro - 1, diaFiltro);
+
+        for (VueloDiario vd : lstVuelosDiarios) {
+            double precioVuelo = vd.getPrecioVuelo();
+            int plazasOcupadas = vd.getNumPlazasOcupadas();
+
+            Date fecha = vd.getFechaVuelo();
+            if (fecha.equals(fechaFiltro)) {
+                obtenido = obtenido + precioVuelo * plazasOcupadas;
+
+                for (VueloBase vb : lstVuelosBase) {
+                    if (vb.getCodigoVuelo().equals(vd.getCodigoVueloBase())) {
+                        int plazas = vb.getNumPlazas();
+                        esperado = esperado + plazas * precioVuelo;
+                    }
+                }
+            }
+        }
+        String ingresoObtenidoFinal = String.valueOf(obtenido);
+        String ingresoEsperadoFinal = String.valueOf(esperado);
+        lblIngresoObtenido.setText(ingresoObtenidoFinal + "€");
+
+        lblIngresoEsperado.setText(ingresoEsperadoFinal + "€");
+
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnRecaudacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecaudacionesActionPerformed
-      if(pnlRecaudaciones.isVisible())
-        pnlRecaudaciones.setVisible(false);
-      else pnlRecaudaciones.setVisible(true);
+        if (pnlRecaudaciones.isVisible())
+            pnlRecaudaciones.setVisible(false);
+        else
+            pnlRecaudaciones.setVisible(true);
     }//GEN-LAST:event_btnRecaudacionesActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    private void cargarCBXCompanyas(){
+    private void cargarCBXCompanyas() {
         List<CompanyaAerea> lstComp = leerCompanyasCSV();
 
         for (CompanyaAerea c : lstComp) {
@@ -890,9 +918,9 @@ for(VueloBase vb: lstVuelosBase){
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblIngresoEsperado;
     private javax.swing.JLabel lblIngresoObtenido;
+    private javax.swing.JLabel lblX;
     private javax.swing.JPanel pnlRecaudaciones;
     private javax.swing.JTable tblCompanyas;
     private javax.swing.JTable tblDestinos;
@@ -901,7 +929,7 @@ for(VueloBase vb: lstVuelosBase){
     private javax.swing.JTextField txtAnyo;
     private javax.swing.JTextField txtAnyo2;
     private javax.swing.JTextField txtAnyo3;
-    private javax.swing.JLabel txtAnyoDinero;
+    private javax.swing.JTextField txtAnyoDinero;
     private javax.swing.JTextField txtAnyoLL;
     private javax.swing.JTextField txtDia;
     private javax.swing.JTextField txtDia2;

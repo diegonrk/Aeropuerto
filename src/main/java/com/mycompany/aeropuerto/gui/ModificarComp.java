@@ -448,8 +448,7 @@ String modificacion;
         List<CompanyaAerea> lstComp = leerCompanyasCSV();
 
         for (CompanyaAerea c : lstComp) {
-            System.out.println(c.getNombre());
-            System.out.println(c.getNombre() + " " + c.getCodigo());
+            
             cbxLstComp.addItem(c.getNombre());
         }
     }

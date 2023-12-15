@@ -30,101 +30,42 @@ import java.util.logging.Logger;
 public class LogicaNegocio {
 
     private static List<Aeropuerto> lstAeropuertos = new ArrayList<Aeropuerto>();
-
-    public static List<Aeropuerto> getAllAeropuertos() {
-        return new ArrayList<Aeropuerto>();
-    }
-
-    public static Aeropuerto getAeropuertoByCodigoIATA(String codigoIATA) {
-        Aeropuerto valorSalida = null;
-
-        for (Aeropuerto a : lstAeropuertos) {
-
-            if (a.getCodigoIATA().equals(codigoIATA)) {
-                valorSalida = a;
-                return valorSalida;
-            }
-        }
-        return valorSalida;
-    }
-
+    private static List<VueloDiario> lstVuelosDiario = new ArrayList<VueloDiario>();
     public static Aeropuerto aeropuertoBase = getAeropuertoByCodigoIATA("OVD");
-
     private static List<CompanyaAerea> lstCompanyas = new ArrayList<CompanyaAerea>();
+    
 
-    public static List<CompanyaAerea> getAllCompanyas() {
-        return new ArrayList<CompanyaAerea>();
-    }
+    
+    
+   
 
-    public static CompanyaAerea getCompanyaByCodigo(String codigo) {
-        CompanyaAerea valorSalida = null;
-
-        return new CompanyaAerea();
-    }
-
-    public static CompanyaAerea getCompanyaByPrefijo(int prefijo) {
-        CompanyaAerea valorSalida = null;
-        for (CompanyaAerea c : lstCompanyas) {
-
-            if (c.getPrefijo() == prefijo) {
-                valorSalida = c;
-                return valorSalida;
-            }
-        }
-        return valorSalida;
-
-    }
-
-    //logica de vuelo base
+    //<editor-fold desc="Lógica Vuelos Base">
+    
     private static List<VueloBase> lstVuelosBase = new ArrayList<VueloBase>();
 
+    /*
+    MÉTODO QUE DEVUELVE TODOS LOS VUELOS BASE DEL FICHERO vueloBase.csv
+    */
     public static List<VueloBase> getAllVuelosBase() {
-         String path = "./src/main/resources/vuelosBase.csv";
-         
-        
- 
+        String path = "./src/main/resources/vuelosBase.csv";
+
         try {
-            List<VueloBase> lstVuelosBase= new CsvToBeanBuilder(new FileReader(path))
+            List<VueloBase> lstVuelosBase = new CsvToBeanBuilder(new FileReader(path))
                     .withType(VueloBase.class).build().parse();
-             
-            
-            
-           return lstVuelosBase;
+
+            return lstVuelosBase;
         } catch (FileNotFoundException ex) {
 
             System.out.println(ex.getMessage());
         }
-        return null; 
-    }
-    
-    
-    
-    
-    
-    public static List<VueloDiario> getAllVuelosDiarios() {
-         String path = "./src/main/resources/vuelosDiarios.csv";
-
-        
- 
-        try {
-            List<VueloDiario> lstVuelosDiarios= new CsvToBeanBuilder(new FileReader(path))
-                    .withType(VueloDiario.class).build().parse();
-             
-            
-            
-           return lstVuelosDiarios;
-        } catch (FileNotFoundException ex) {
-
-            System.out.println(ex.getMessage());
-        }
-        return null; 
+        return null;
     }
 
     
-    
-    
-    
-    
+    /*
+    MÉTODO QUE DEVUELVE UN VUELO BASE EN FUNCIÓN DEL CÓDIGO DE ESE VUELO,
+    QUE SE LE PASA COMO ARGUMENTO AL MÉTODO
+    */
     public static VueloBase getVueloBaseByCodigo(String codigo) {
         VueloBase vueloBaseSalida;
         List<VueloBase> lstVuelos = getAllVuelosBase();
@@ -137,59 +78,10 @@ public class LogicaNegocio {
         return null;
     }
 
-    /*
-     public static VueloBase getVueloBaseByDiaSemana(char diaSemana){
-         List<VueloBase> VueloBaseByDiaSemana= lstVuelosBase.stream()
-                 .filter(v-> v.getDiasOperacion().matches(diaSemana))
-                 .toList();
-    return new VueloBase();
-    }
-     */
-    public static VueloBase getVueloBaseByAeropuertoOrigen(String codigoIATA) {
-
-        return new VueloBase();
-    }
-
-    public static VueloBase getVueloBaseByAeropuertoDestino(String codigoIATA) {
-        return new VueloBase();
-    }
-
-    //logica vuelos diarios
-    private static List<VueloDiario> lstVuelosDiario = new ArrayList<VueloDiario>();
-
     
-
-    public static VueloDiario getVueloDiarioByCodigoVueloBase(String codigo) {
-        
-        return new VueloDiario();
-    }
-
-    public static void addCompanyaAerea(CompanyaAerea newComp) {
-        lstCompanyas.add(newComp);
-    }
-
-    public static void addVueloBase(VueloBase v) {
-        lstVuelosBase.add(v);
-    }
-
-    public static void updateCompanyaByCodigo(String codigo, CompanyaAerea newComp) {
-        CompanyaAerea oldComp = getCompanyaByCodigo(codigo);
-        oldComp.setDireccion(newComp.getDireccion());
-        oldComp.setMunicipio(newComp.getMunicipio());
-        oldComp.setNombre(newComp.getNombre());
-        oldComp.setPrefijo(newComp.getPrefijo());
-        oldComp.setNumInfoPasajero(newComp.getNumInfoPasajero());
-        oldComp.setNumInfoAeropuerto(newComp.getNumInfoAeropuerto());
-
-        //Optional<CompanyaAerea> optValorSalida = new Optional<CompanyaAerea>();
-    }
-
-    public static void deleteCompanyaByCodigo(String codigo) {
-        CompanyaAerea delComp = getCompanyaByCodigo(codigo);
-        lstCompanyas.remove(delComp);
-
-    }
-
+    /*
+    MÉTODO QUE ESCRIBE LOS VUELOS BASE E EL FICHERO vuelosBase.csv
+    */
     public static void escribirCSVvuelosBase(VueloBase vb) {
         try {
             String path = "./src/main/resources/vuelosBase.csv";
@@ -209,7 +101,84 @@ public class LogicaNegocio {
             System.out.println(e.getMessage());
         }
     }
+
     
+    /*
+    MÉTODO QUE ACTUALIZA EL FICHERO vuelosBase.csv 
+    */
+    public static void actualizarCSVVuelosBase(List<VueloBase> lstVuelosBase) {
+
+        String path = "./src/main/resources/vuelosBase.csv";
+
+        try (Writer writer = new FileWriter(path)) {
+            StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder(writer).build();
+
+            beanToCsv.write(lstVuelosBase);
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /*
+    MÉTODO MEDIANTE EL CUAL ES POSIBLE REALIZAR EL BORRADO DE UN VUELO BASE
+    */
+    public static void borrarVueloBase(String codigo) {
+        System.out.println(codigo);
+        List<VueloBase> lstVuelosBase = getAllVuelosBase();
+        List<VueloBase> lstNueva = new ArrayList<>();
+        for (VueloBase vb : lstVuelosBase) {
+            if (!vb.getCodigoVuelo().equals(codigo)) {
+                lstNueva.add(vb);
+            }
+        }
+
+        actualizarCSVVuelosBase(lstNueva);
+    }
+    
+    
+    
+        ///MÉTODOS JUAN DIEGO
+
+    public static VueloBase getVueloBaseByAeropuertoOrigen(String codigoIATA) {
+     return new VueloBase();
+    }
+
+    public static VueloBase getVueloBaseByAeropuertoDestino(String codigoIATA) {
+        return new VueloBase();
+    }
+
+    public static void addVueloBase(VueloBase v) {
+        lstVuelosBase.add(v);
+    }
+//</editor-fold>
+    
+    //<editor-fold desc="Lógica Vuelos Diarios">
+    
+    
+    /*
+    MÉTODO QUE DEVUELVE TODOS LOS VUELOS DIARIOS DEL CSV vuelosDiarios.csv
+    */
+    public static List<VueloDiario> getAllVuelosDiarios() {
+        String path = "./src/main/resources/vuelosDiarios.csv";
+
+        try {
+            List<VueloDiario> lstVuelosDiarios = new CsvToBeanBuilder(new FileReader(path))
+                    .withType(VueloDiario.class).build().parse();
+
+            return lstVuelosDiarios;
+        } catch (FileNotFoundException ex) {
+
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+
+    
+    /*
+    MÉTODO QUE ESCRIBE LOS VUELOS DIARIOS EN EL CSV vuelosDiarios.csv 
+    */
     public static void escribirCSVvuelosDiarios(VueloDiario vb) {
         try {
             String path = "./src/main/resources/vuelosDiarios.csv";
@@ -230,6 +199,105 @@ public class LogicaNegocio {
         }
     }
 
+    /*
+    MÉTODO QUE DEVUELVE UNA LISTA DE LOS VUELOS DIARIOS EN FUNCION DE SU ORIGEN
+    */
+    public static List<VueloDiario> VuelosDiariosPorOrigen(String origen) {
+        List<VueloDiario> lstVueloDiario = getAllVuelosDiarios();
+        List<VueloDiario> lstVueloDiarioReturn = new ArrayList<>();
+        List<VueloBase> lstVueloBase = getAllVuelosBase();
+        List<VueloBase> lstVueloBaseOrigen = new ArrayList<>();;
+
+        for (VueloBase vb : lstVuelosBase) {
+            if (vb.getAeropuertoOrigen().equals(origen)) {
+
+                for (VueloDiario vd : lstVuelosDiario) {
+                    if (vd.getCodigoVueloBase().equals(vb.getCodigoVuelo())) {
+                        lstVueloDiarioReturn.add(vd);
+                    }
+                }
+            }
+        }
+
+        return lstVueloDiarioReturn;
+    }
+
+    
+    
+    /*
+    MÉTODO QUE DEVUELVE UNA LISTA CON LOS VUELOS DIARIOS FILTRADOS POR DESTINO
+    */
+    public static List<VueloDiario> VuelosDiariosPorDestino(String destino) {
+        List<VueloDiario> lstVueloDiario = getAllVuelosDiarios();
+        List<VueloDiario> lstVueloDiarioReturn = new ArrayList<>();
+        List<VueloBase> lstVueloBase = getAllVuelosBase();
+        List<VueloBase> lstVueloBaseOrigen = new ArrayList<>();;
+
+        for (VueloBase vb : lstVuelosBase) {
+            if (vb.getAeropuertoOrigen().toString().equals(destino)) {
+
+                for (VueloDiario vd : lstVuelosDiario) {
+                    if (vd.getCodigoVueloBase().toString().equals(vb.getCodigoVuelo())) {
+                        lstVueloDiarioReturn.add(vd);
+                    }
+                }
+            }
+        }
+
+        return lstVueloDiarioReturn;
+    }
+
+    
+    
+    /*
+    MÉTODO QUE ACTUALIZA EL FICHERO vuelosDiarios.csv CADA VEZ QUE SE REALICEN CAMBIOS
+    */
+    public static void actualizarCSVVuelosDiarios(List<VueloDiario> lstVuelosDiarios) {
+
+        String path = "./src/main/resources/vuelosDiarios.csv";
+
+        try (Writer writer = new FileWriter(path)) {
+            StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder(writer).build();
+
+            beanToCsv.write(lstVuelosDiarios);
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /*
+    MÉTODO QUE BORRA UN VUELO DIARIO DEL ARCHIVO vuelosDiarios.csv 
+    PARA IDENTIFICAR AL VUELO SE LE PASA EL CÓDIGO Y LA FECHA DEL VUELO
+    */
+    public static void borrarVueloDiario(String codigo, Date fecha) {
+        System.out.println(codigo);
+        List<VueloDiario> lstVuelosDiarios = getAllVuelosDiarios();
+        List<VueloDiario> lstNueva = new ArrayList<>();
+        for (VueloDiario vd : lstVuelosDiarios) {
+            if (!vd.getCodigoVueloBase().equals(codigo) && !vd.getFechaVuelo().equals(fecha)) {
+                lstNueva.add(vd);
+            }
+        }
+
+        actualizarCSVVuelosDiarios(lstNueva);
+    }
+    
+    
+    public static VueloDiario getVueloDiarioByCodigoVueloBase(String codigo) {
+ return new VueloDiario();
+    }
+
+//</editor-fold>
+    
+     //<editor-fold desc="Lógica Compañías">
+
+    
+    /////////////////MÉTODOS COMPAÑÍAS////////////////////////////////////////
+    
+
+    
     /*
     MÉTODO PARA ESCRIBIR COMPAÑÍAS EN EL ARCHIVO CSV DE COMPAÑÍAS
      */
@@ -252,178 +320,153 @@ public class LogicaNegocio {
             System.out.println(e.getMessage());
         }
     }
-    
-    
+
+     /*
+    MÉTODO PARA ACTUALIZAR LAS COMPAÑÍAS AÉREAS EN EL FICHERO CSV
+    */
     public static void actualizarCSVComp(List<CompanyaAerea> lstComp) {
-        
+
         String path = "./src/main/resources/companyas.csv";
 
-            try (Writer writer = new FileWriter(path)) {
-                StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder(writer).build();
+        try (Writer writer = new FileWriter(path)) {
+            StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder(writer).build();
 
-                beanToCsv.write(lstComp);
+            beanToCsv.write(lstComp);
 
-            
         } catch (Exception e) {
 
             System.out.println(e.getMessage());
         }
     }
 
+     /*
+    MÉTODO QUE DEVUELVE UNA LISTA DE LAS COMPAÑÍAS AÉREAS PRESENTES EN EL CSV CORRESPONDIENTE
+    */
     public static List<CompanyaAerea> leerCompanyasCSV() {
         String path = "./src/main/resources/companyas.csv";
 
-        
- 
         try {
             List<CompanyaAerea> lstCompanyaAerea = new CsvToBeanBuilder(new FileReader(path))
                     .withType(CompanyaAerea.class).build().parse();
-             
-            
-            
-           return lstCompanyaAerea;
+
+            return lstCompanyaAerea;
         } catch (FileNotFoundException ex) {
 
             System.out.println(ex.getMessage());
         }
         return null;
 
-        
+    }
+
+    /*
+    MÉTODO PARA BORRAR UNA COMPAÑÍA AÉREA
+    */
+    public static void borrarCompanya(CompanyaAerea Comp) {
+        List<CompanyaAerea> lstCompanyaAerea = leerCompanyasCSV();
+        List<CompanyaAerea> lstNueva = new ArrayList<>();
+        for (CompanyaAerea ca : lstCompanyaAerea) {
+            if (!ca.getNombre().equals(Comp.getNombre())) {
+                lstNueva.add(ca);
+            }
+        }
+
+        actualizarCSVComp(lstNueva);
     }
     
+    //MÉTODO JUAN DIEGO
+    public static void addCompanyaAerea(CompanyaAerea newComp) {
+        lstCompanyas.add(newComp);
+    }
+    
+    public static List<CompanyaAerea> getAllCompanyas() {
+        return new ArrayList<CompanyaAerea>();
+    }
+    
+    
+    public static void deleteCompanyaByCodigo(String codigo) {
+        CompanyaAerea delComp = getCompanyaByCodigo(codigo);
+        lstCompanyas.remove(delComp);
+
+    }
+    
+    
+    public static CompanyaAerea getCompanyaByCodigo(String codigo) {
+        CompanyaAerea valorSalida = null;
+
+        return new CompanyaAerea();
+    }
+
+    public static CompanyaAerea getCompanyaByPrefijo(int prefijo) {
+        CompanyaAerea valorSalida = null;
+        for (CompanyaAerea c : lstCompanyas) {
+
+            if (c.getPrefijo() == prefijo) {
+                valorSalida = c;
+                return valorSalida;
+            }
+        }
+        return valorSalida;
+
+    }
+    
+    public static void updateCompanyaByCodigo(String codigo, CompanyaAerea newComp) {
+        CompanyaAerea oldComp = getCompanyaByCodigo(codigo);
+        oldComp.setDireccion(newComp.getDireccion());
+        oldComp.setMunicipio(newComp.getMunicipio());
+        oldComp.setNombre(newComp.getNombre());
+        oldComp.setPrefijo(newComp.getPrefijo());
+        oldComp.setNumInfoPasajero(newComp.getNumInfoPasajero());
+        oldComp.setNumInfoAeropuerto(newComp.getNumInfoAeropuerto());
+
+        //Optional<CompanyaAerea> optValorSalida = new Optional<CompanyaAerea>();
+    }
+
+//</editor-fold>
+    
+    //<editor-fold desc="Lógica Aeropuertos">
+
     public static List<Aeropuerto> leerAeropuertosCSV() {
         String path = "./src/main/resources/aeropuertos.csv";
 
-        
- 
         try {
             List<Aeropuerto> lstAeropuertos = new CsvToBeanBuilder(new FileReader(path))
                     .withType(Aeropuerto.class).build().parse();
-             
-            
-            
-           return lstAeropuertos;
+
+            return lstAeropuertos;
         } catch (FileNotFoundException ex) {
 
             System.out.println(ex.getMessage());
         }
         return null;
 
-        
     }
     
     
-    public static void borrarCompanya(CompanyaAerea Comp){
-    List<CompanyaAerea> lstCompanyaAerea = leerCompanyasCSV();
-    List<CompanyaAerea> lstNueva = new ArrayList<>();
-    for (CompanyaAerea ca: lstCompanyaAerea){
-    if(!ca.getNombre().equals(Comp.getNombre())){
-        lstNueva.add(ca);
-    } 
-    }
-    
-    actualizarCSVComp(lstNueva);
+    public static List<Aeropuerto> getAllAeropuertos() {
+        return new ArrayList<Aeropuerto>();
     }
 
-    
-    public static List<VueloDiario> VuelosDiariosPorOrigen(String origen){
-    List<VueloDiario> lstVueloDiario = getAllVuelosDiarios();
-    List<VueloDiario> lstVueloDiarioReturn = new ArrayList<>();
-    List<VueloBase> lstVueloBase = getAllVuelosBase();
-    List<VueloBase> lstVueloBaseOrigen = new ArrayList<>();;
-    
-   
-    for(VueloBase vb: lstVuelosBase){
-    if(vb.getAeropuertoOrigen().equals(origen)){
-    
-        for(VueloDiario vd: lstVuelosDiario){
-        if (vd.getCodigoVueloBase().equals(vb.getCodigoVuelo())){
-        lstVueloDiarioReturn.add(vd);
+    public static Aeropuerto getAeropuertoByCodigoIATA(String codigoIATA) {
+        Aeropuerto valorSalida = null;
+
+        for (Aeropuerto a : lstAeropuertos) {
+
+            if (a.getCodigoIATA().equals(codigoIATA)) {
+                valorSalida = a;
+                return valorSalida;
+            }
         }
-        }
+        return valorSalida;
     }
-    }
-    
-   return lstVueloDiarioReturn;
-    }
-    
-    
-    public static List<VueloDiario> VuelosDiariosPorDestino(String destino){
-    List<VueloDiario> lstVueloDiario = getAllVuelosDiarios();
-    List<VueloDiario> lstVueloDiarioReturn = new ArrayList<>();
-    List<VueloBase> lstVueloBase = getAllVuelosBase();
-    List<VueloBase> lstVueloBaseOrigen = new ArrayList<>();;
-    
-   
-    for(VueloBase vb: lstVuelosBase){
-    if(vb.getAeropuertoOrigen().toString().equals(destino)){
-    
-        for(VueloDiario vd: lstVuelosDiario){
-        if (vd.getCodigoVueloBase().toString().equals(vb.getCodigoVuelo())){
-        lstVueloDiarioReturn.add(vd);
-        }
-        }
-    }
-    }
-    
-   return lstVueloDiarioReturn;
-    }
-    
-    public static void actualizarCSVVuelosBase(List<VueloBase> lstVuelosBase) {
-        
-        String path = "./src/main/resources/vuelosBase.csv";
 
-            try (Writer writer = new FileWriter(path)) {
-                StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder(writer).build();
-
-                beanToCsv.write(lstVuelosBase);
-
-            
-        } catch (Exception e) {
-
-            System.out.println(e.getMessage());
-        }
-    }
+//</editor-fold>
     
-    public static void actualizarCSVVuelosDiarios(List<VueloDiario> lstVuelosDiarios) {
-        
-        String path = "./src/main/resources/vuelosDiarios.csv";
-
-            try (Writer writer = new FileWriter(path)) {
-                StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder(writer).build();
-
-                beanToCsv.write(lstVuelosDiarios);
-
-            
-        } catch (Exception e) {
-
-            System.out.println(e.getMessage());
-        }
-    }
     
-    public static void borrarVueloBase(String codigo){
-        System.out.println(codigo);
-    List<VueloBase> lstVuelosBase = getAllVuelosBase();
-    List<VueloBase> lstNueva = new ArrayList<>();
-    for (VueloBase vb: lstVuelosBase){
-    if(!vb.getCodigoVuelo().equals(codigo)){
-        lstNueva.add(vb);
-    } 
-    }
     
-    actualizarCSVVuelosBase(lstNueva);
-    }
     
-    public static void borrarVueloDiario(String codigo, Date fecha){
-        System.out.println(codigo);
-    List<VueloDiario> lstVuelosDiarios = getAllVuelosDiarios();
-    List<VueloDiario> lstNueva = new ArrayList<>();
-    for (VueloDiario vd: lstVuelosDiarios){
-    if(!vd.getCodigoVueloBase().equals(codigo) && !vd.getFechaVuelo().equals(fecha)){
-        lstNueva.add(vd);
-    } 
-    }
+
     
-    actualizarCSVVuelosDiarios(lstNueva);
-    }
+    
+
+    
 }

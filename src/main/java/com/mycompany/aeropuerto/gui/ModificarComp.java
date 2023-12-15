@@ -32,6 +32,16 @@ public class ModificarComp extends javax.swing.JDialog {
         pnlModificaciones.setVisible(false);
 
     }
+    public ModificarComp() {
+        initComponents();
+        cargarCBXCompanyas();
+        cargarcbxModificaciones();
+        cbxCambios.setVisible(false);
+        pnlModCompInfo.setVisible(false);
+        pnlModificar.setVisible(false);
+        pnlModificaciones.setVisible(false);
+
+    }
 
     private void cargarcbxModificaciones() {
         cbxCambios.addItem("Prefijo");

@@ -4,6 +4,12 @@
  */
 package com.mycompany.aeropuerto.gui;
 
+import com.mycompany.aeropuerto.dto.VueloBase;
+import com.mycompany.aeropuerto.dto.VueloDiario;
+import static com.mycompany.aeropuerto.logica.LogicaNegocio.getAllVuelosBase;
+import static com.mycompany.aeropuerto.logica.LogicaNegocio.getAllVuelosDiarios;
+import java.util.List;
+
 /**
  *
  * @author Diego
@@ -20,6 +26,9 @@ public class ModVueloBase extends javax.swing.JDialog {
 
     public ModVueloBase() {
         initComponents();
+        cargarcbxVuelos ();
+        lblError.setVisible(false);
+
     }
 
     /**
@@ -33,6 +42,9 @@ public class ModVueloBase extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        cbxVuelos = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        lblError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -42,18 +54,43 @@ public class ModVueloBase extends javax.swing.JDialog {
 
         jLabel2.setText("Aún no");
 
+        cbxVuelos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "elige vuelo" }));
+        cbxVuelos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxVuelosActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Ver tabla");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(262, 262, 262)
+                                .addComponent(jLabel2)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxVuelos, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(48, 48, 48)
+                            .addComponent(jButton1)
+                            .addGap(135, 135, 135)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(262, 262, 262)
-                        .addComponent(jLabel2)))
+                        .addGap(127, 127, 127)
+                        .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -61,14 +98,54 @@ public class ModVueloBase extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jLabel1)
-                .addGap(160, 160, 160)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxVuelos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
                 .addComponent(jLabel2)
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addContainerGap(259, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        TablaVuelosBase tvb = new TablaVuelosBase();
+        tvb.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cbxVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxVuelosActionPerformed
+        List<VueloDiario> lstVuelosDiarios = getAllVuelosDiarios();
+        String codigo = cbxVuelos.getSelectedItem().toString();
+        
+        System.out.println(codigo);
+        for(VueloDiario vd: lstVuelosDiarios){
+            System.out.println(vd.getCodigoVueloBase());
+        if(vd.getCodigoVueloBase().equals(codigo)){
+        lblError.setText("Ya existen vuelos diarios. No se puede modificar el vuelo base.");
+        lblError.setVisible(true);
+        
+        } else {
+        lblError.setText("Aún no existen vuelos diarios. Es posible realizar la modificación.");
+        lblError.setVisible(true);
+        }
+        }
+        
+        
+        
+    }//GEN-LAST:event_cbxVuelosActionPerformed
+
+    
+    public void cargarcbxVuelos (){
+    List<VueloBase> lstVuelos = getAllVuelosBase();
+    for(VueloBase vb: lstVuelos){
+    cbxVuelos.addItem(vb.getCodigoVuelo());
+    }
+    
+    }
     /**
      * @param args the command line arguments
      */
@@ -112,7 +189,10 @@ public class ModVueloBase extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbxVuelos;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblError;
     // End of variables declaration//GEN-END:variables
 }

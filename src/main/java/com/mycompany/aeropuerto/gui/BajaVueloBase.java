@@ -6,9 +6,11 @@ package com.mycompany.aeropuerto.gui;
 
 import com.mycompany.aeropuerto.dto.CompanyaAerea;
 import com.mycompany.aeropuerto.dto.VueloBase;
+import com.mycompany.aeropuerto.dto.VueloDiario;
 import com.mycompany.aeropuerto.logica.LogicaNegocio;
 import static com.mycompany.aeropuerto.logica.LogicaNegocio.borrarVueloBase;
 import static com.mycompany.aeropuerto.logica.LogicaNegocio.getAllVuelosBase;
+import static com.mycompany.aeropuerto.logica.LogicaNegocio.getAllVuelosDiarios;
 import static com.mycompany.aeropuerto.logica.LogicaNegocio.leerCompanyasCSV;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -64,6 +66,7 @@ public class BajaVueloBase extends javax.swing.JDialog {
         cbxCompanya = new javax.swing.JComboBox<>();
         btnBorrar = new javax.swing.JButton();
         lblInfoBorrado = new javax.swing.JLabel();
+        lblExisteVuelo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -149,6 +152,8 @@ public class BajaVueloBase extends javax.swing.JDialog {
             }
         });
 
+        lblExisteVuelo.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -170,7 +175,9 @@ public class BajaVueloBase extends javax.swing.JDialog {
                             .addGap(121, 121, 121)
                             .addComponent(jLabel9)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(55, Short.MAX_VALUE)
+                        .addComponent(lblExisteVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
                         .addComponent(btnBorrar)
                         .addGap(44, 44, 44)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -188,7 +195,9 @@ public class BajaVueloBase extends javax.swing.JDialog {
                 .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBorrar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBorrar)
+                    .addComponent(lblExisteVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addComponent(pnlConfirmacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -201,7 +210,7 @@ public class BajaVueloBase extends javax.swing.JDialog {
 
     private void btnSiBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiBorrarActionPerformed
         try {
-            int x = tblVuelosBase.getSelectedRow();
+            int x = tblVuelosBase.convertRowIndexToModel(tblVuelosBase.getSelectedRow());
             VuelosBaseTableModel model = (VuelosBaseTableModel) tblVuelosBase.getModel();
             String cod = (String) model.getValueAt(x, 0);
             borrarVueloBase(cod);
@@ -222,13 +231,35 @@ public class BajaVueloBase extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSiBorrarActionPerformed
 
     private void btnNoBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoBorrarActionPerformed
-        lblInfoBorrado.setText("Operación cancelada.");
+        lblExisteVuelo.setText("Operación cancelada.");
                pnlConfirmacion.setVisible(false);
  
         lblInfoBorrado.setVisible(true);    }//GEN-LAST:event_btnNoBorrarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-                pnlConfirmacion.setVisible(true);
+        List<VueloDiario> lstVuelosDiarios = getAllVuelosDiarios();
+        int x = tblVuelosBase.convertRowIndexToModel(tblVuelosBase.getSelectedRow());
+        VuelosBaseTableModel model = (VuelosBaseTableModel) tblVuelosBase.getModel();
+        String cod = (String) model.getValueAt(x, 0);
+        
+        for(VueloDiario vd: lstVuelosDiarios){
+            
+        if(vd.getCodigoVueloBase().equals(cod)){
+        lblExisteVuelo.setText("Ya hay vuelos diarios de este vuelo base, no se puede borrar.");
+        lblExisteVuelo.setVisible(true);
+        
+        } else {
+                  
+pnlConfirmacion.setVisible(true);
+        lblExisteVuelo.setText("No hay vuelos diarios aún, se puede borrar.");
+        lblExisteVuelo.setVisible(true);
+        }
+        }
+        
+        
+        
+        
+        
 
     }//GEN-LAST:event_btnBorrarActionPerformed
 
@@ -339,6 +370,7 @@ public class BajaVueloBase extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblExisteVuelo;
     private javax.swing.JLabel lblInfoBorrado;
     private javax.swing.JPanel pnlConfirmacion;
     private javax.swing.JTable tblVuelosBase;

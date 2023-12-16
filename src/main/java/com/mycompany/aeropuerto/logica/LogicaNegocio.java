@@ -221,6 +221,20 @@ public class LogicaNegocio {
 
         return lstVueloDiarioReturn;
     }
+    
+    
+    public static List<VueloDiario> VuelosDiariosPorFecha(Date fecha) {
+        List<VueloDiario> lstVueloDiario = getAllVuelosDiarios();
+        List<VueloDiario> lstVueloDiarioReturn = new ArrayList<>();
+        
+        for(VueloDiario vd: lstVueloDiario){
+        if(vd.getFechaVuelo().equals(fecha)){
+        lstVueloDiarioReturn.add(vd);
+        }
+        
+        }
+        return lstVueloDiarioReturn;
+    }
 
     
     

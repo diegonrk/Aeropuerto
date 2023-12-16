@@ -6,11 +6,16 @@ package com.mycompany.aeropuerto.gui;
 
 import com.mycompany.aeropuerto.dto.VueloBase;
 import com.mycompany.aeropuerto.dto.VueloDiario;
+import static com.mycompany.aeropuerto.logica.LogicaNegocio.actualizarCSVVuelosDiarios;
 import static com.mycompany.aeropuerto.logica.LogicaNegocio.getAllVuelosBase;
 import static com.mycompany.aeropuerto.logica.LogicaNegocio.getAllVuelosDiarios;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -74,13 +79,16 @@ public class ModVueloDiario extends javax.swing.JDialog {
         lblPlazas = new javax.swing.JLabel();
         lblPrecio = new javax.swing.JLabel();
         btnModificar = new javax.swing.JButton();
-        cbxModificaciones = new javax.swing.JComboBox<>();
         pnlMods = new javax.swing.JPanel();
         lblCabezaMod = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNewDatos = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        cbxModificaciones = new javax.swing.JComboBox<>();
         btnBuscar = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -115,65 +123,10 @@ public class ModVueloDiario extends javax.swing.JDialog {
             }
         });
 
-        cbxModificaciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona el campo a modificar" }));
-
-        javax.swing.GroupLayout pnlDatosLayout = new javax.swing.GroupLayout(pnlDatos);
-        pnlDatos.setLayout(pnlDatosLayout);
-        pnlDatosLayout.setHorizontalGroup(
-            pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDatosLayout.createSequentialGroup()
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDatosLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(55, 55, 55)
-                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblHoraL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblHoraS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPlazas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPrecio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlDatosLayout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(cbxModificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addComponent(btnModificar)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(22, 22, 22))
-        );
-        pnlDatosLayout.setVerticalGroup(
-            pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDatosLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(lblHoraS))
-                .addGap(18, 18, 18)
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(lblHoraL))
-                .addGap(18, 18, 18)
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(lblPlazas))
-                .addGap(18, 18, 18)
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPrecio)
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnModificar)
-                    .addComponent(cbxModificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39))
-        );
-
-        jTextField1.setToolTipText("");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtNewDatos.setToolTipText("");
+        txtNewDatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtNewDatosActionPerformed(evt);
             }
         });
 
@@ -190,6 +143,13 @@ public class ModVueloDiario extends javax.swing.JDialog {
         btnCancelar.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         btnCancelar.setText("Cancelar");
 
+        cbxModificaciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona el campo a modificar" }));
+        cbxModificaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxModificacionesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlModsLayout = new javax.swing.GroupLayout(pnlMods);
         pnlMods.setLayout(pnlModsLayout);
         pnlModsLayout.setHorizontalGroup(
@@ -197,9 +157,12 @@ public class ModVueloDiario extends javax.swing.JDialog {
             .addGroup(pnlModsLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(pnlModsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCabezaMod)
                     .addGroup(pnlModsLayout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCabezaMod)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbxModificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlModsLayout.createSequentialGroup()
+                        .addComponent(txtNewDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnGuardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -210,13 +173,68 @@ public class ModVueloDiario extends javax.swing.JDialog {
             pnlModsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlModsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblCabezaMod)
+                .addComponent(cbxModificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblCabezaMod)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlModsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNewDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pnlDatosLayout = new javax.swing.GroupLayout(pnlDatos);
+        pnlDatos.setLayout(pnlDatosLayout);
+        pnlDatosLayout.setHorizontalGroup(
+            pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDatosLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(pnlMods, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDatosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnModificar)
+                    .addGroup(pnlDatosLayout.createSequentialGroup()
+                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11))
+                        .addGap(32, 32, 32)
+                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblHoraL, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblHoraS, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPlazas, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(93, 93, 93)))
+                .addGap(22, 22, 22))
+        );
+        pnlDatosLayout.setVerticalGroup(
+            pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDatosLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(lblHoraS, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblHoraL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblPlazas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(btnModificar)
+                .addGap(28, 28, 28)
+                .addComponent(pnlMods, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71))
         );
 
         btnBuscar.setText("Buscar");
@@ -225,6 +243,25 @@ public class ModVueloDiario extends javax.swing.JDialog {
                 btnBuscarActionPerformed(evt);
             }
         });
+
+        jMenu1.setText("Menú");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem1.setText("Listado vuelos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -243,7 +280,7 @@ public class ModVueloDiario extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
@@ -259,14 +296,8 @@ public class ModVueloDiario extends javax.swing.JDialog {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pnlDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(pnlMods, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(pnlDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,23 +321,85 @@ public class ModVueloDiario extends javax.swing.JDialog {
                 .addComponent(btnBuscar)
                 .addGap(3, 3, 3)
                 .addComponent(pnlDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlMods, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        List<VueloDiario> lstVuelos = getAllVuelosDiarios();
+        List<VueloDiario> lstVuelosNew = new ArrayList<>();
+        String sel = cbxModificaciones.getSelectedItem().toString();
+        String codVuelo = cbxCodigos.getSelectedItem().toString();
+        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
+        
+        int anyoFiltro = Integer.parseInt(txtAnyo.getText())-1900;
+        int mesFiltro = Integer.parseInt(txtMes.getText())-1;
+        int diaFiltro = Integer.parseInt(txtDia.getText());
+        Date fecha = new Date(anyoFiltro,mesFiltro,diaFiltro);
+        
+        for(VueloDiario vd: lstVuelos){
+            
+        if(vd.getCodigoVueloBase().equals(codVuelo) && vd.getFechaVuelo().equals(fecha)){
+            String horaSalida = formatoHora.format(vd.getHoraSalidaReal());
+        String horaLlegada = formatoHora.format(vd.getHoraLlegadaReal());
+         if(sel.equals("Número de plazas")){
+             vd.setNumPlazasOcupadas(Integer.parseInt(txtNewDatos.getText()));
+             lstVuelosNew.add(vd);
+         } 
+         else if (sel.equals("Precio para el vuelo")){
+         vd.setPrecioVuelo(Float.parseFloat(txtNewDatos.getText()));
+         lstVuelosNew.add(vd);
+         }
+         
+         else if (sel.equals("Hora de salida")){
+         String horaSalNew = txtNewDatos.getText();
+                try {
+                    Date nuevaHora = formatoHora.parse(horaSalNew);
+                    vd.setHoraSalidaReal(nuevaHora);
+                    lstVuelosNew.add(vd);
+                } catch (ParseException ex) {
+                    Logger.getLogger(ModVueloDiario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+         }
+          else if (sel.equals("Hora de llegada")){
+         String horaLLNew = txtNewDatos.getText();
+                try {
+                    Date nuevaHora = formatoHora.parse(horaLLNew);
+                    System.out.println(nuevaHora);
+                    vd.setHoraLlegadaReal(nuevaHora);
+                    lstVuelosNew.add(vd);
+
+                } catch (ParseException ex) {
+                    Logger.getLogger(ModVueloDiario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+         }
+         
+        }
+        }
+        actualizarCSVVuelosDiarios(lstVuelosNew);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtNewDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewDatosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtNewDatosActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        pnlMods.setVisible(true);
         cbxModificaciones.setVisible(true);
     }//GEN-LAST:event_btnModificarActionPerformed
 
@@ -319,14 +412,18 @@ public class ModVueloDiario extends javax.swing.JDialog {
         int mes = Integer.parseInt(txtMes.getText());
         int anyo = Integer.parseInt(txtAnyo.getText());
         
-        Date fecha = new Date(dia, mes, anyo);
+        Date fecha = new Date(anyo-1900, mes-1, dia);
         
         for(VueloDiario vd: lstVuelosDiarios){
         if(vd.getCodigoVueloBase().equals(cbxCodigos.getSelectedItem()) && vd.getFechaVuelo().equals(fecha)){
-        lblHoraS.setText(vd.getHoraSalidaReal().toString());
-        lblHoraL.setText(vd.getHoraLlegadaReal().toString());
-        lblPlazas.setText("muchas cosas");
-        lblPrecio.setText("mucho betis");
+        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
+        String horaSalida = formatoHora.format(vd.getHoraSalidaReal());
+        String horaLlegada = formatoHora.format(vd.getHoraLlegadaReal());
+            
+        lblHoraS.setText(horaSalida);
+        lblHoraL.setText(horaLlegada);
+        lblPlazas.setText(String.valueOf(vd.getNumPlazasOcupadas()));
+        lblPrecio.setText(String.valueOf(vd.getPrecioVuelo()));
         
         }
         }
@@ -336,6 +433,33 @@ public class ModVueloDiario extends javax.swing.JDialog {
        
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void cbxModificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxModificacionesActionPerformed
+      String sel = cbxModificaciones.getSelectedItem().toString();
+        if(sel.equals("Número de plazas")){
+            lblCabezaMod.setText("Introduce el nuevo número de plazas ocupadas:");
+         } 
+         else if (sel.equals("Precio para el vuelo")){
+        lblCabezaMod.setText("Introduce el nuevo precio del vuelo:");
+         }
+         
+         else if (sel.equals("Hora de salida")){
+        lblCabezaMod.setText("Introduce la nueva hora de salida en formato \"horas:minutos\":");
+         }
+          else if (sel.equals("Hora de llegada")){
+                 lblCabezaMod.setText("Introduce la nueva hora de llegada en formato \"horas:minutos\":");
+
+         }
+    }//GEN-LAST:event_cbxModificacionesActionPerformed
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        TablaConsultasVD tvd = new TablaConsultasVD();
+        tvd.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void cargarcbxModificaciones() {
         cbxModificaciones.addItem("Hora de salida");
@@ -402,7 +526,9 @@ public class ModVueloDiario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel lblCabezaMod;
     private javax.swing.JLabel lblHoraL;
     private javax.swing.JLabel lblHoraS;
@@ -413,5 +539,6 @@ public class ModVueloDiario extends javax.swing.JDialog {
     private javax.swing.JTextField txtAnyo;
     private javax.swing.JTextField txtDia;
     private javax.swing.JTextField txtMes;
+    private javax.swing.JTextField txtNewDatos;
     // End of variables declaration//GEN-END:variables
 }

@@ -29,7 +29,7 @@ public class MenuBorrarVueloDiario extends javax.swing.JDialog {
     public MenuBorrarVueloDiario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        cargarCBXFiltros();
+        pnlConfirmar.setVisible(false);
         pnlOrigen.setVisible(true);
         jtableVueloDiario.setModel(new VuelosDiariosTableModel(LogicaNegocio.getAllVuelosDiarios()));
         
@@ -37,18 +37,16 @@ public class MenuBorrarVueloDiario extends javax.swing.JDialog {
     }
     public MenuBorrarVueloDiario() {
         initComponents();
-        cargarCBXFiltros();
+                pnlConfirmar.setVisible(false);
+
         pnlOrigen.setVisible(true);
         jtableVueloDiario.setModel(new VuelosDiariosTableModel(LogicaNegocio.getAllVuelosDiarios()));
         
     }
 
-    public void cargarCBXFiltros() {
-        cbxFiltros.addItem("Aeropuerto origen");
-        cbxFiltros.addItem("Aeropuerto destino");
-        cbxFiltros.addItem("Fechas");
-        cbxFiltros.addItem("Compañía");
-    }
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,42 +58,29 @@ public class MenuBorrarVueloDiario extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        cbxFiltros = new javax.swing.JComboBox<>();
         pnlOrigen = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        cbxOrigen = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtableVueloDiario = new javax.swing.JTable();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        btnBorrar = new javax.swing.JButton();
+        pnlConfirmar = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         btnSi = new javax.swing.JButton();
         btnNo = new javax.swing.JButton();
+        lblMensaje = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtDia = new javax.swing.JTextField();
+        txtMes = new javax.swing.JTextField();
+        txtAnyo = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("BORRADO DE VUELOS DIARIOS");
-
-        jLabel2.setText("Filtrar por:");
-
-        cbxFiltros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "filtros" }));
-        cbxFiltros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxFiltrosActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Selecciona el origen del vuelo:");
-
-        cbxOrigen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxOrigenActionPerformed(evt);
-            }
-        });
 
         jtableVueloDiario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -110,36 +95,34 @@ public class MenuBorrarVueloDiario extends javax.swing.JDialog {
         ));
         jScrollPane2.setViewportView(jtableVueloDiario);
 
-        jLabel6.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel6.setText("Deshabilitado");
+        btnBorrar.setBackground(new java.awt.Color(255, 51, 0));
+        btnBorrar.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        btnBorrar.setText("Borrar");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlOrigenLayout = new javax.swing.GroupLayout(pnlOrigen);
         pnlOrigen.setLayout(pnlOrigenLayout);
         pnlOrigenLayout.setHorizontalGroup(
             pnlOrigenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlOrigenLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(pnlOrigenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlOrigenLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(36, 36, 36)
-                        .addComponent(cbxOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
+                .addGroup(pnlOrigenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnBorrar)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlOrigenLayout.setVerticalGroup(
             pnlOrigenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlOrigenLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(pnlOrigenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cbxOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBorrar)
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         jLabel4.setText("¿Desea realmente borrar el vuelo seleccionado?");
@@ -156,33 +139,60 @@ public class MenuBorrarVueloDiario extends javax.swing.JDialog {
         btnNo.setBackground(new java.awt.Color(255, 51, 0));
         btnNo.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         btnNo.setText("No");
+        btnNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNoActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlConfirmarLayout = new javax.swing.GroupLayout(pnlConfirmar);
+        pnlConfirmar.setLayout(pnlConfirmarLayout);
+        pnlConfirmarLayout.setHorizontalGroup(
+            pnlConfirmarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlConfirmarLayout.createSequentialGroup()
                 .addGap(74, 74, 74)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSi)
+                .addGroup(pnlConfirmarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlConfirmarLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSi)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnNo)
                 .addContainerGap(86, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlConfirmarLayout.setVerticalGroup(
+            pnlConfirmarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlConfirmarLayout.createSequentialGroup()
                 .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlConfirmarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(btnSi)
                     .addComponent(btnNo))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        jLabel5.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel5.setText("Deshabilitado");
+        jLabel7.setText("Introduce la fecha:");
+
+        jLabel2.setFont(new java.awt.Font("sansserif", 0, 10)); // NOI18N
+        jLabel2.setText("Día");
+
+        jLabel3.setFont(new java.awt.Font("sansserif", 0, 10)); // NOI18N
+        jLabel3.setText("Mes");
+
+        jLabel5.setFont(new java.awt.Font("sansserif", 0, 10)); // NOI18N
+        jLabel5.setText("Año");
+
+        btnBuscar.setBackground(new java.awt.Color(102, 255, 0));
+        btnBuscar.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -192,84 +202,61 @@ public class MenuBorrarVueloDiario extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlOrigen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(175, 175, 175)
-                                .addComponent(jLabel2)
-                                .addGap(27, 27, 27)
-                                .addComponent(cbxFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5)))
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 29, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(jLabel7)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtAnyo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(36, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
                     .addComponent(jLabel2)
-                    .addComponent(cbxFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(0, 0, 0)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAnyo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar))
+                .addGap(27, 27, 27)
                 .addComponent(pnlOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addComponent(pnlConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cbxFiltrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFiltrosActionPerformed
-       
-        List<VueloDiario> lstVuelosDiarios = getAllVuelosDiarios();
-        List<VueloBase> lstVuelosBase = getAllVuelosBase();
-        
-        if (cbxFiltros.getSelectedItem().equals("Aeropuerto origen")) {
-            pnlOrigen.setVisible(true);
-            Set<String> aeropuertos = new HashSet<>();
-            for (VueloBase vb : lstVuelosBase) {
-                aeropuertos.add(vb.getAeropuertoOrigen());
-            }
-            List<String> lstAeropuertos = new ArrayList<>(aeropuertos);
-
-            for (String aero : lstAeropuertos) {
-                cbxOrigen.addItem(aero);
-            }
-            
-           
-
-        } else if(cbxFiltros.getSelectedItem().equals("Aeropuerto destino")) {
-            pnlOrigen.setVisible(true);
-            Set<String> aeropuertos = new HashSet<>();
-            for (VueloBase vb : lstVuelosBase) {
-                aeropuertos.add(vb.getAeropuertoDestino());
-            }
-            List<String> lstAeropuertos = new ArrayList<>(aeropuertos);
-
-            for (String aero : lstAeropuertos) {
-                cbxOrigen.addItem(aero);
-            }
-            
-        }
-
-        
-    }//GEN-LAST:event_cbxFiltrosActionPerformed
-
-    private void cbxOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOrigenActionPerformed
-      String origen = cbxOrigen.getSelectedItem().toString();
-        jtableVueloDiario.setModel(new VuelosDiariosTableModel(LogicaNegocio.VuelosDiariosPorOrigen(origen)));
-    }//GEN-LAST:event_cbxOrigenActionPerformed
 
     private void btnSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiActionPerformed
         try {
@@ -281,10 +268,28 @@ public class MenuBorrarVueloDiario extends javax.swing.JDialog {
         
        
         jtableVueloDiario.setModel(new VuelosDiariosTableModel(LogicaNegocio.getAllVuelosDiarios()));
+        lblMensaje.setText("Vuelo borrado correctamente.");
         }catch(Exception e){
         
         }
     }//GEN-LAST:event_btnSiActionPerformed
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+       pnlConfirmar.setVisible(true);
+    }//GEN-LAST:event_btnBorrarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        
+        int dia = Integer.parseInt(txtDia.getText());
+        int mes = Integer.parseInt(txtMes.getText());
+        int anyo = Integer.parseInt(txtAnyo.getText());
+        Date fecha = new Date(anyo-1900,mes-1,dia);
+        jtableVueloDiario.setModel(new VuelosDiariosTableModel(LogicaNegocio.VuelosDiariosPorFecha(fecha)));
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoActionPerformed
+        pnlConfirmar.setVisible(false);
+    }//GEN-LAST:event_btnNoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -329,19 +334,23 @@ public class MenuBorrarVueloDiario extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBorrar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnNo;
     private javax.swing.JButton btnSi;
-    private javax.swing.JComboBox<String> cbxFiltros;
-    private javax.swing.JComboBox<String> cbxOrigen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jtableVueloDiario;
+    private javax.swing.JLabel lblMensaje;
+    private javax.swing.JPanel pnlConfirmar;
     private javax.swing.JPanel pnlOrigen;
+    private javax.swing.JTextField txtAnyo;
+    private javax.swing.JTextField txtDia;
+    private javax.swing.JTextField txtMes;
     // End of variables declaration//GEN-END:variables
 }

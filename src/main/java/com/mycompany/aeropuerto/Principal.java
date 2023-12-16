@@ -4,14 +4,22 @@
  */
 package com.mycompany.aeropuerto;
 
+import com.mycompany.aeropuerto.gui.BajaVueloBase;
 import com.mycompany.aeropuerto.gui.GestionCompanyas;
+import com.mycompany.aeropuerto.gui.GestionVuelosBase;
+import com.mycompany.aeropuerto.gui.GestionVuelosDiarios;
 import com.mycompany.aeropuerto.gui.MenuBorrarComp;
+import com.mycompany.aeropuerto.gui.MenuBorrarVueloDiario;
 import com.mycompany.aeropuerto.gui.MenuCompanyas;
 import com.mycompany.aeropuerto.gui.MenuVueloBase;
 import com.mycompany.aeropuerto.gui.MenuVueloDiario;
+import com.mycompany.aeropuerto.gui.ModVueloBase;
+import com.mycompany.aeropuerto.gui.ModVueloDiario;
 import com.mycompany.aeropuerto.gui.ModificarComp;
 import com.mycompany.aeropuerto.gui.Paneles;
 import com.mycompany.aeropuerto.gui.TablaConsultasComp;
+import com.mycompany.aeropuerto.gui.TablaConsultasVD;
+import com.mycompany.aeropuerto.gui.TablaVuelosBase;
 
 /**
  *
@@ -214,6 +222,11 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem9.setText("Menu Paneles");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem9);
 
         jMenuBar1.add(jMenu3);
@@ -222,22 +235,47 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem14.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem14.setText("Menú vuelo diario");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem14);
 
         jMenuItem10.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem10.setText("Alta");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem10);
 
         jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem11.setText("Baja");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem11);
 
         jMenuItem12.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem12.setText("Modificaciones");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem12);
 
         jMenuItem13.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem13.setText("Consultas");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem13);
 
         jMenuBar1.add(jMenu4);
@@ -255,18 +293,38 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem18.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem18.setText("Alta");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem18);
 
         jMenuItem19.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem19.setText("Baja");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem19);
 
         jMenuItem20.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem20.setText("Modificaciones");
+        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem20ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem20);
 
         jMenuItem21.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem21.setText("Consultas");
+        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem21ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem21);
 
         jMenuBar1.add(jMenu5);
@@ -326,7 +384,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnvdActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-        
+    MenuVueloBase mvb = new MenuVueloBase();
+    mvb.setVisible(true);
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void mnpnlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnpnlActionPerformed
@@ -337,8 +396,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnpnlActionPerformed
 
     private void mnvbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnvbActionPerformed
-        MenuVueloDiario menuVD = new MenuVueloDiario();
-        menuVD.setVisible(true);
+        MenuVueloBase menuVB = new MenuVueloBase();
+        menuVB.setVisible(true);
     }//GEN-LAST:event_mnvbActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
@@ -365,6 +424,55 @@ public class Principal extends javax.swing.JFrame {
         TablaConsultasComp tcc = new TablaConsultasComp();
         tcc.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        Paneles pnl = new Paneles(this,true);
+        pnl.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+       MenuVueloDiario mvd = new MenuVueloDiario();
+       mvd.setVisible(true);
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        GestionVuelosDiarios gvd = new GestionVuelosDiarios();
+        gvd.setVisible(true);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        MenuBorrarVueloDiario mbvd = new MenuBorrarVueloDiario();
+        mbvd.setVisible(true);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        ModVueloDiario modvd = new ModVueloDiario();
+        modvd.setVisible(true);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        TablaConsultasVD tcvd = new TablaConsultasVD();
+        tcvd.setVisible(true);
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+       GestionVuelosBase gvb = new GestionVuelosBase();
+       gvb.setVisible(true);
+    }//GEN-LAST:event_jMenuItem18ActionPerformed
+
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+ BajaVueloBase bvb = new BajaVueloBase();
+        bvb.setVisible(true);    }//GEN-LAST:event_jMenuItem19ActionPerformed
+
+    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
+        ModVueloBase modvb = new ModVueloBase(this,true);
+        modvb.setVisible(true);
+    }//GEN-LAST:event_jMenuItem20ActionPerformed
+
+    private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
+        TablaVuelosBase tvb = new TablaVuelosBase();
+        tvb.setVisible(true);
+    }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     /**
      * @param args the command line arguments

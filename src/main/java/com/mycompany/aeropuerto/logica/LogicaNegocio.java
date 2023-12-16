@@ -120,6 +120,9 @@ public class LogicaNegocio {
             System.out.println(e.getMessage());
         }
     }
+    
+    
+    
 
     /*
     MÉTODO MEDIANTE EL CUAL ES POSIBLE REALIZAR EL BORRADO DE UN VUELO BASE

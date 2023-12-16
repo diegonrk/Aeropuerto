@@ -260,7 +260,7 @@ public class MenuBorrarVueloDiario extends javax.swing.JDialog {
 
     private void btnSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiActionPerformed
         try {
-        int x = jtableVueloDiario.getSelectedRow();
+        int x = jtableVueloDiario.convertRowIndexToModel(jtableVueloDiario.getSelectedRow());
         VuelosDiariosTableModel model = (VuelosDiariosTableModel) jtableVueloDiario.getModel();
         String cod = (String) model.getValueAt(x, 0);
         Date fecha = (Date) model.getValueAt(x, 1);

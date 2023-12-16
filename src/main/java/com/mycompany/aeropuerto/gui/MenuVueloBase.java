@@ -75,6 +75,11 @@ public class MenuVueloBase extends javax.swing.JDialog {
         jButton4.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jButton4.setText("MODIFICACIONES");
         jButton4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton4);
 
         jButton3.setBackground(new java.awt.Color(204, 204, 255));
@@ -131,6 +136,11 @@ public class MenuVueloBase extends javax.swing.JDialog {
         BajaVueloBase bvb = new BajaVueloBase();
         bvb.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        ModVueloBase mvb = new ModVueloBase();
+        mvb.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

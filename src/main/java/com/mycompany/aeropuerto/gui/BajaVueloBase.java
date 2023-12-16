@@ -24,21 +24,24 @@ import javax.swing.table.TableRowSorter;
  * @author Diego
  */
 public class BajaVueloBase extends javax.swing.JDialog {
+
     TableRowSorter<VuelosBaseTableModel> FiltrosVB;
-   
+
     /**
      * Creates new form BajaVueloBase
      */
     public BajaVueloBase(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
     }
+
     public BajaVueloBase() {
         initComponents();
         cargarCBXComp();
-        // tblVuelosBase.setModel(new VuelosBaseTableModel(LogicaNegocio.getAllVuelosBase()));
-         lblInfoBorrado.setVisible(false);
+        pnlConfirmacion.setVisible(false);
+        tblVuelosBase.setModel(new VuelosBaseTableModel(LogicaNegocio.getAllVuelosBase()));
+        lblInfoBorrado.setVisible(false);
     }
 
     /**
@@ -53,14 +56,14 @@ public class BajaVueloBase extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblVuelosBase = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        pnlConfirmacion = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnSiBorrar = new javax.swing.JButton();
         btnNoBorrar = new javax.swing.JButton();
-        lblInfoBorrado = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         cbxCompanya = new javax.swing.JComboBox<>();
         btnBorrar = new javax.swing.JButton();
+        lblInfoBorrado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -104,32 +107,28 @@ public class BajaVueloBase extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlConfirmacionLayout = new javax.swing.GroupLayout(pnlConfirmacion);
+        pnlConfirmacion.setLayout(pnlConfirmacionLayout);
+        pnlConfirmacionLayout.setHorizontalGroup(
+            pnlConfirmacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlConfirmacionLayout.createSequentialGroup()
                 .addGap(74, 74, 74)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblInfoBorrado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel1)
                 .addGap(70, 70, 70)
                 .addComponent(btnSiBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnNoBorrar)
                 .addContainerGap(78, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlConfirmacionLayout.setVerticalGroup(
+            pnlConfirmacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlConfirmacionLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlConfirmacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(btnSiBorrar)
                     .addComponent(btnNoBorrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblInfoBorrado, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
-                .addGap(12, 12, 12))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jLabel2.setText("Selecciona  la compañía:");
@@ -154,40 +153,47 @@ public class BajaVueloBase extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblInfoBorrado, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(99, 99, 99)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(211, 211, 211)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(42, 42, 42)
-                                    .addComponent(cbxCompanya, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addComponent(jLabel9))))
-                    .addComponent(btnBorrar))
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlConfirmacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(106, 106, 106)
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxCompanya, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(121, 121, 121)
+                            .addComponent(jLabel9)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBorrar)
+                        .addGap(44, 44, 44)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel9)
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cbxCompanya, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBorrar)
                 .addGap(21, 21, 21)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addComponent(pnlConfirmacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblInfoBorrado, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addGap(17, 17, 17))
         );
 
         pack();
@@ -195,92 +201,93 @@ public class BajaVueloBase extends javax.swing.JDialog {
 
     private void btnSiBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiBorrarActionPerformed
         try {
-             int x = tblVuelosBase.getSelectedRow();
-        VuelosBaseTableModel model = (VuelosBaseTableModel) tblVuelosBase.getModel();
-        String cod = (String) model.getValueAt(x, 0);
-         borrarVueloBase(cod);
-         lblInfoBorrado.setText("Vuelo borrado correctamente.");
-        lblInfoBorrado.setVisible(true);
-        /*
+            int x = tblVuelosBase.getSelectedRow();
+            VuelosBaseTableModel model = (VuelosBaseTableModel) tblVuelosBase.getModel();
+            String cod = (String) model.getValueAt(x, 0);
+            borrarVueloBase(cod);
+            lblInfoBorrado.setText("Vuelo borrado correctamente.");
+            lblInfoBorrado.setVisible(true);
+            /*
         BajaVueloBase bajaVueloBase = new BajaVueloBase();
         bajaVueloBase.revalidate();
         bajaVueloBase.repaint();
-       */
-        tblVuelosBase.setModel(new VuelosBaseTableModel(LogicaNegocio.getAllVuelosBase()));
-        }catch(Exception e){
-        lblInfoBorrado.setText("ERROR!! Operación cancelada.");
-        lblInfoBorrado.setVisible(true); 
+             */
+            tblVuelosBase.setModel(new VuelosBaseTableModel(LogicaNegocio.getAllVuelosBase()));
+        } catch (Exception e) {
+            lblInfoBorrado.setText("ERROR!! Operación cancelada.");
+            lblInfoBorrado.setVisible(true);
         }
-        
-        
-       
 
-        
+
     }//GEN-LAST:event_btnSiBorrarActionPerformed
 
     private void btnNoBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoBorrarActionPerformed
- lblInfoBorrado.setText("Operación cancelada.");
+        lblInfoBorrado.setText("Operación cancelada.");
+               pnlConfirmacion.setVisible(false);
+ 
         lblInfoBorrado.setVisible(true);    }//GEN-LAST:event_btnNoBorrarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        // TODO add your handling code here:
+                pnlConfirmacion.setVisible(true);
+
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void cbxCompanyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCompanyaActionPerformed
         String companya = cbxCompanya.getSelectedItem().toString();
+        String codigo = "";
+
         List<CompanyaAerea> lstComp = leerCompanyasCSV();
         List<VueloBase> lstVB = getAllVuelosBase();
-         List<VueloBase> lstVueloBase = new ArrayList<>();
-         
-         for(VueloBase vb: lstVB){
-          String codigoVB = vb.getCodigoVuelo();
-               for (CompanyaAerea ca: lstComp){
-                   if(codigoVB.contains(ca.getCodigo()))
-                   {
-                        lstVueloBase.add(vb);
-                   }
-               }
-        
-         }
-        
-        
+        List<VueloBase> lstVueloBase = new ArrayList<>();
+        for (CompanyaAerea ca : lstComp) {
+            if (ca.getNombre().equals(companya)) {
+
+                codigo = ca.getCodigo();
+            }
+        }
+
+        for (CompanyaAerea ca : lstComp) {
+
+            for (VueloBase vb : lstVB) {
+                String codigoVB = vb.getCodigoVuelo();
+                if (codigoVB.contains(ca.getCodigo())) {
+                    lstVueloBase.add(vb);
+                }
+            }
+
+        }
+
         tblVuelosBase.setModel(new VuelosBaseTableModel(lstVueloBase));
-         /*
-        
         FiltrosVB = new TableRowSorter<>(new VuelosBaseTableModel(lstVueloBase));
         TableRowSorter<VuelosBaseTableModel> FiltrosVB = new TableRowSorter<>(new VuelosBaseTableModel(lstVueloBase));
-         tblVuelosBase.setRowSorter(FiltrosVB);
+        tblVuelosBase.setRowSorter(FiltrosVB);
         List<RowSorter.SortKey> skLlegadas = new ArrayList<>();
         skLlegadas.add(new RowSorter.SortKey(2, SortOrder.ASCENDING));
         FiltrosVB.setSortKeys(skLlegadas);
-        RowFilter<VuelosBaseTableModel, Integer> rfL = RowFilter.regexFilter(companya, 4);
+        RowFilter<VuelosBaseTableModel, Integer> rfL = RowFilter.regexFilter(codigo, 0);
         FiltrosVB.setRowFilter(rfL);
 
-          */      
-    }//GEN-LAST:event_cbxCompanyaActionPerformed
-    
-   public void cargarCBXComp() {
-    List<VueloBase> lstVuelosBase = getAllVuelosBase();
-    List<CompanyaAerea> lstCompanyas = leerCompanyasCSV();
-    Set<String> lstCodigos = new HashSet<>(); 
 
-    for (VueloBase vb: lstVuelosBase) {
-        lstCodigos.add(vb.getCodigoVuelo());
+    }//GEN-LAST:event_cbxCompanyaActionPerformed
+
+    public void cargarCBXComp() {
+        List<VueloBase> lstVuelosBase = getAllVuelosBase();
+        List<CompanyaAerea> lstCompanyas = leerCompanyasCSV();
+        Set<String> lstCodigos = new HashSet<>();
+
+        for (VueloBase vb : lstVuelosBase) {
+            lstCodigos.add(vb.getCodigoVuelo());
         }
-    
-     for(CompanyaAerea c: lstCompanyas){
-     for(String s: lstCodigos){
-     if(c.getCodigo().equals(s)){
-     cbxCompanya.addItem(c.getNombre());
-     }
-     }
-     }
+
+        for (CompanyaAerea c : lstCompanyas) {
+            for (String s : lstCodigos) {
+                if (c.getCodigo().equals(s)) {
+                    cbxCompanya.addItem(c.getNombre());
+                }
+            }
+        }
     }
 
-   
-
-
-            
     /**
      * @param args the command line arguments
      */
@@ -331,9 +338,9 @@ public class BajaVueloBase extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblInfoBorrado;
+    private javax.swing.JPanel pnlConfirmacion;
     private javax.swing.JTable tblVuelosBase;
     // End of variables declaration//GEN-END:variables
 }

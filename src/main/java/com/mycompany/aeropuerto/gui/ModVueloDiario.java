@@ -99,6 +99,24 @@ public class ModVueloDiario extends javax.swing.JDialog {
 
         jLabel2.setText("Fecha:");
 
+        txtDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDiaActionPerformed(evt);
+            }
+        });
+
+        txtMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMesActionPerformed(evt);
+            }
+        });
+
+        txtAnyo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAnyoActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Día");
 
         jLabel4.setText("Mes");
@@ -380,7 +398,6 @@ public class ModVueloDiario extends javax.swing.JDialog {
          String horaLLNew = txtNewDatos.getText();
                 try {
                     Date nuevaHora = formatoHora.parse(horaLLNew);
-                    System.out.println(nuevaHora);
                     vd.setHoraLlegadaReal(nuevaHora);
                     lstVuelosNew.add(vd);
                     lblHoraL.setText(horaLLNew);
@@ -395,7 +412,7 @@ public class ModVueloDiario extends javax.swing.JDialog {
         actualizarCSVVuelosDiarios(lstVuelosNew);
         
         
-        
+        txtNewDatos.setText("");
         
         
         
@@ -439,6 +456,13 @@ public class ModVueloDiario extends javax.swing.JDialog {
         lblPlazas.setText(String.valueOf(vd.getNumPlazasOcupadas()));
         lblPrecio.setText(String.valueOf(vd.getPrecioVuelo()));
         
+        } else {
+        lblHoraS.setText("");
+        lblHoraL.setText("");
+        lblPlazas.setText("");
+        lblPrecio.setText("");
+        pnlMods.setVisible(false);
+        
         }
         }
         
@@ -475,6 +499,20 @@ public class ModVueloDiario extends javax.swing.JDialog {
         TablaConsultasVD tvd = new TablaConsultasVD();
         tvd.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void txtDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiaActionPerformed
+        pnlDatos.setVisible(false);
+        pnlMods.setVisible(false);
+        
+    }//GEN-LAST:event_txtDiaActionPerformed
+
+    private void txtMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMesActionPerformed
+pnlDatos.setVisible(false);
+        pnlMods.setVisible(false);    }//GEN-LAST:event_txtMesActionPerformed
+
+    private void txtAnyoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAnyoActionPerformed
+pnlDatos.setVisible(false);
+        pnlMods.setVisible(false);    }//GEN-LAST:event_txtAnyoActionPerformed
 
     private void cargarcbxModificaciones() {
         cbxModificaciones.addItem("Hora de salida");
